@@ -1,5 +1,6 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "pch.h"
+#include <iostream>
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
@@ -8,11 +9,33 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 {
     switch (ul_reason_for_call)
     {
-    case DLL_PROCESS_ATTACH:
-    case DLL_THREAD_ATTACH:
-    case DLL_THREAD_DETACH:
-    case DLL_PROCESS_DETACH:
-        break;
+        case DLL_PROCESS_ATTACH:
+            std::cout << "DLL_PROCESS_ATTACH!" << std::endl <<
+                "\thModule: " << hModule << std::endl <<
+                "\tul_reason_for_call: " << ul_reason_for_call << std::endl <<
+                "\tlpReserved: " << lpReserved << std::endl;
+            break;
+
+        case DLL_THREAD_ATTACH:
+            std::cout << "DLL_THREAD_ATTACH!" << std::endl <<
+                "\thModule: " << hModule << std::endl <<
+                "\tul_reason_for_call: " << ul_reason_for_call << std::endl <<
+                "\tlpReserved: " << lpReserved << std::endl;
+            break;
+
+        case DLL_THREAD_DETACH:
+            std::cout << "DLL_THREAD_DETACH!" << std::endl <<
+                "\thModule: " << hModule << std::endl <<
+                "\tul_reason_for_call: " << ul_reason_for_call << std::endl <<
+                "\tlpReserved: " << lpReserved << std::endl;
+            break;
+
+        case DLL_PROCESS_DETACH:
+            std::cout << "DLL_PROCESS_DETACH!" << std::endl <<
+                "\thModule: " << hModule << std::endl <<
+                "\tul_reason_for_call: " << ul_reason_for_call << std::endl <<
+                "\tlpReserved: " << lpReserved << std::endl;
+            break;
     }
     return TRUE;
 }
