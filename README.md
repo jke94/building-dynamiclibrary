@@ -12,9 +12,10 @@ msbuild .\building-dynamiclibrary.sln -p:Configuration=Release -p:Platform=x86 -
 msbuild .\building-dynamiclibrary.sln -p:Configuration=Debug -p:Platform=x64 -t:Build
 msbuild .\building-dynamiclibrary.sln -p:Configuration=Debug -p:Platform=x86 -t:Build
 ```
+or running with Visual Studio 2022.
 
-## Build Nuget.
+## Building Nuget package.
 
 ```
-.\nuget.exe pack .\building-dynamiclibrary\dynamiclibrary.nuspec
+.\packages\NuGet.CommandLine.6.6.1\tools\NuGet.exe pack .\dynamiclibrary.nuspec
 ```
