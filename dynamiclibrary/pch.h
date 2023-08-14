@@ -10,4 +10,6 @@
 // add headers that you want to pre-compile here
 #include "framework.h"
 #include "OperationsApi.h"
+#include "ObserverApi.h"
+
 #endif //PCH_H
