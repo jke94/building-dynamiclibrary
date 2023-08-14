@@ -4,12 +4,21 @@
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    // Consuming dynamic library: Using OperationsApi classes.
 
-    std::cout << OperationsApi::suma(2.4, 3.6) << std::endl;
-    std::cout << OperationsApi::resta(2.4, 3.6) << std::endl;
-    std::cout << OperationsApi::multiplicar(2.4, 3.6) << std::endl;
-    std::cout << OperationsApi::dividir(2.4, 3.6) << std::endl;
+    std::cout << OperationsApi::Add::numbers(22.4, 3.6) << std::endl;
+    std::cout << OperationsApi::Add::numbers(22, 3) << std::endl;
+
+    std::cout << OperationsApi::Subtract::numbers(22.4, 3.6) << std::endl;
+    std::cout << OperationsApi::Subtract::numbers(22, 3) << std::endl;
+
+    std::cout << OperationsApi::Multiply::numbers(22.4, 3.6) << std::endl;
+    std::cout << OperationsApi::Multiply::numbers(22, 3) << std::endl;
+
+    std::cout << OperationsApi::Divide::numbers(22.4, 3.6) << std::endl;
+    std::cout << OperationsApi::Divide::numbers(22, 3) << std::endl;
+
+    // Consuming dynamic library: Using ObserverApi classes.
 
     ObserverApi::Subject *subject = new ObserverApi::Subject;
 

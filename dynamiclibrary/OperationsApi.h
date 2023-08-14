@@ -8,19 +8,32 @@
 
 namespace OperationsApi
 {
-	extern "C" DYNAMICLIBRARY_API double suma(
-		double a,
-		double b);
+	class DYNAMICLIBRARY_API Add
+	{
+		public:
 
-	extern "C" DYNAMICLIBRARY_API double resta(
-		double a,
-		double b);
+			static int numbers(int a, int b);
+			static double numbers(double a, double b);
+	};
 
-	extern "C" DYNAMICLIBRARY_API double multiplicar(
-		double a,
-		double b);
+	class DYNAMICLIBRARY_API Subtract
+	{
+		public:
+			static int numbers(int a, int b);
+			static double numbers(double a, double b);
+	};
 
-	extern "C" DYNAMICLIBRARY_API double dividir(
-		double a,
-		double b);
+	class DYNAMICLIBRARY_API Multiply
+	{
+		public:
+			static int numbers(int a, int b);
+			static double numbers(double a, double b);
+	};
+
+	class DYNAMICLIBRARY_API Divide
+	{
+		public:
+			static int numbers(int a, int b);
+			static double numbers(double a, double b);
+	};
 }

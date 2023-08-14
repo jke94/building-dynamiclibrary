@@ -4,60 +4,58 @@
 
 #ifdef DYNAMICLIBRARY_EXPORTS
     #define DYNAMICLIBRARY_API __declspec(dllexport)
-    #define IMPORT_EXPORT __declspec(dllexport)
 #else
     #define DYNAMICLIBRARY_API __declspec(dllimport)
-    #define IMPORT_EXPORT __declspec(dllimport)
 #endif
 
 namespace ObserverApi
 {
-	class IMPORT_EXPORT IObserver
+	class DYNAMICLIBRARY_API IObserver
 	{
-	public:
-		virtual ~IObserver() {};
-		virtual void Update(const std::string& message_from_subject) = 0;
+	    public:
+		    virtual ~IObserver() {};
+		    virtual void Update(const std::string& message_from_subject) = 0;
 	};
 
-	class IMPORT_EXPORT ISubject
+	class DYNAMICLIBRARY_API ISubject
 	{
-	public:
-		virtual ~ISubject() {};
-		virtual void Attach(IObserver* observer) = 0;
-		virtual void Detach(IObserver* observer) = 0;
-		virtual void Notify() = 0;
+	    public:
+		    virtual ~ISubject() {};
+		    virtual void Attach(IObserver* observer) = 0;
+		    virtual void Detach(IObserver* observer) = 0;
+		    virtual void Notify() = 0;
 	};
 
-    class IMPORT_EXPORT Subject : public ISubject
+    class DYNAMICLIBRARY_API Subject : public ISubject
     {
-    public:
+        public:
 
-        virtual ~Subject();
+            virtual ~Subject();
 
-        void Attach(IObserver* observer) override;
+            void Attach(IObserver* observer) override;
 
-        void Detach(IObserver* observer) override;
+            void Detach(IObserver* observer) override;
 
-        void Notify() override;
+            void Notify() override;
 
-        void CreateMessage(std::string message = "Empty");
+            void CreateMessage(std::string message = "Empty");
 
-        void HowManyObserver();
+            void HowManyObserver();
 
-        /**
-         * Usually, the subscription logic is only a fraction of what a Subject can
-         * really do. Subjects commonly hold some important business logic, that
-         * triggers a notification method whenever something important is about to
-         * happen (or after it).
-         */
-        void SomeBusinessLogic();
+            /**
+             * Usually, the subscription logic is only a fraction of what a Subject can
+             * really do. Subjects commonly hold some important business logic, that
+             * triggers a notification method whenever something important is about to
+             * happen (or after it).
+             */
+            void SomeBusinessLogic();
 
-    private:
-        std::list<IObserver*> list_observer_;
-        std::string message_;
+        private:
+            std::list<IObserver*> list_observer_;
+            std::string message_;
     };
 
-    class IMPORT_EXPORT Observer : public IObserver
+    class DYNAMICLIBRARY_API Observer : public IObserver
     {
         public:
             Observer(int id_number, Subject& subject);
