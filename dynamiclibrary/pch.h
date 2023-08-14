@@ -9,5 +9,5 @@
 
 // add headers that you want to pre-compile here
 #include "framework.h"
-#include "Operations.h"
+#include "OperationsApi.h"
 #endif //PCH_H
