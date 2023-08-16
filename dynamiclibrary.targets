@@ -6,24 +6,24 @@
             <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)native\interface\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
         </ClCompile>
     </ItemDefinitionGroup>
-    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
         <ClCompile>
             <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
         </ClCompile>
         <Link>
-            <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)native\libs\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+            <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(MSBuildThisFileDirectory)native\libs\x64\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
             <!-- Put your lib name here -->
-            <AdditionalDependencies>dynamiclibrary.lib;%(AdditionalDependencies)</AdditionalDependencies>
+            <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">dynamiclibrary.lib;%(AdditionalDependencies)</AdditionalDependencies>
         </Link>
     </ItemDefinitionGroup>
-    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
         <ClCompile>
             <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
         </ClCompile>
         <Link>
-            <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)native\libs\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+            <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MSBuildThisFileDirectory)native\libs\x64\Release\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
             <!-- Put your lib name here -->
-            <AdditionalDependencies>dynamiclibrary.lib;%(AdditionalDependencies)</AdditionalDependencies>
+            <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|x64'">dynamiclibrary.lib;%(AdditionalDependencies)</AdditionalDependencies>
         </Link>
     </ItemDefinitionGroup>
 </Project>
