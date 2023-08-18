@@ -14,34 +14,40 @@
         Building and delivering dynamic library example.
     </summary>
     <language>en-US</language>
-    <!-- <projectUrl>TODO</projectUrl> -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <!-- <licenseUrl>TODO</licenseUrl> -->
-    <!-- <copyright>TODO</copyright> -->
     <dependencies>
     </dependencies>
     <references></references>
     <tags>Native, native</tags>
   </metadata>
   <files>
-        <!-- win-x64 -->
-        <file src="x64\Release\dynamiclibrary.lib"        target="build\native\libs\x64\Release"  exclude="**.pdb"/>
-        <file src="x64\Debug\dynamiclibrary.lib"          target="build\native\libs\x64\Debug"/>
-        <file src="x64\Debug\dynamiclibrary.pdb"          target="build\native\libs\x64\Debug"/>
+    <!-- Release - x64 -->
+    <file src="x64\Release\dynamiclibrary.dll"        target="build\native\libs\x64\Release"  exclude="**.pdb"/>
+    <file src="x64\Release\dynamiclibrary.lib"        target="build\native\libs\x64\Release"  exclude="**.pdb"/>
 
-        <!-- win-x86 -->
-        <file src="Release\dynamiclibrary.lib"              target="build\native\libs\x86\Release"  exclude="**.pdb"/>
-        <file src="Debug\dynamiclibrary.lib"                target="build\native\libs\x86\Debug"/>
-        <file src="Debug\dynamiclibrary.pdb"                target="build\native\libs\x86\Debug"/>
+    <!-- Release - Win32 -->
+    <file src="Win32\Release\dynamiclibrary.dll"      target="build\native\libs\x86\Release"  exclude="**.pdb"/>
+    <file src="Win32\Release\dynamiclibrary.lib"      target="build\native\libs\x86\Release"  exclude="**.pdb"/>
 
-        <!-- Header files -->
-        <file src="dynamiclibrary\OperationsApi.h"          target="build\native\interface" />
-        <file src="dynamiclibrary\ObserverApi.h"            target="build\native\interface" />
-        
-        <!-- Readme file -->
-        <file src="dynamiclibrary\README.md"                target="doc" />
+    <!-- Debug - x64 -->
+    <file src="x64\Debug\dynamiclibrary.dll"          target="build\native\libs\x64\Debug"/>
+    <file src="x64\Debug\dynamiclibrary.lib"          target="build\native\libs\x64\Debug"/>
+    <file src="x64\Debug\dynamiclibrary.pdb"          target="build\native\libs\x64\Debug"/>
 
-        <!-- Target files -->
-        <file src="dynamiclibrary.targets"                  target="build\native" />
+    <!-- Debug - Win32 -->
+    <file src="Win32\Debug\dynamiclibrary.dll"        target="build\native\libs\x86\Debug"/>
+    <file src="Win32\Debug\dynamiclibrary.lib"        target="build\native\libs\x86\Debug"/>
+    <file src="Win32\Debug\dynamiclibrary.pdb"        target="build\native\libs\x86\Debug"/>
+
+    <!-- Header files -->
+    <file src="dynamiclibrary\OperationsApi.h"        target="build\native\interface" />
+    <file src="dynamiclibrary\ObserverApi.h"          target="build\native\interface" />
+    
+    <!-- Readme file -->
+    <file src="dynamiclibrary\README.md"              target="doc" />
+
+    <!-- Target files -->
+    <file src="dynamiclibrary.targets"                target="build\native" />
+
   </files>
 </package>
