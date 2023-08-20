@@ -59,8 +59,14 @@
     <ClCompile Include="Subject.cpp">
       <Filter>Source Files\ObserverApi</Filter>
     </ClCompile>
+    <ClCompile Include="OperationsApiImplementation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="dynamiclibrary.def">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

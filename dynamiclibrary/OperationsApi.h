@@ -7,7 +7,7 @@
 #endif
 namespace OperationsApi
 {
-	class DYNAMICLIBRARY_API Add
+	class Add
 	{
 		public:
 
@@ -15,21 +15,21 @@ namespace OperationsApi
 			static double numbers(double a, double b);
 	};
 
-	class DYNAMICLIBRARY_API Subtract
+	class Subtract
 	{
 		public:
 			static int numbers(int a, int b);
 			static double numbers(double a, double b);
 	};
 
-	class DYNAMICLIBRARY_API Multiply
+	class Multiply
 	{
 		public:
 			static int numbers(int a, int b);
 			static double numbers(double a, double b);
 	};
 
-	class DYNAMICLIBRARY_API Divide
+	class Divide
 	{
 		public:
 			static int numbers(int a, int b);

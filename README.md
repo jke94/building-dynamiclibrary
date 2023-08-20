@@ -19,3 +19,7 @@ or running with Visual Studio 2022.
 ```
 .\packages\NuGet.CommandLine.6.6.1\tools\NuGet.exe pack .\dynamiclibrary.nuspec
 ```
+
+## Useful information.
+
+- [MSDN - What is a DLL](https://learn.microsoft.com/en-us/troubleshoot/windows-client/deployment/dynamic-link-library)

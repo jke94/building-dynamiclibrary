@@ -1,0 +1,4 @@
+LIBRARY DYNAMICLIBRARY
+EXPORTS
+	AddIntNumbers
+	AddDoubleNumbers
