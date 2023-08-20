@@ -2,3 +2,9 @@ LIBRARY DYNAMICLIBRARY
 EXPORTS
 	AddIntNumbers
 	AddDoubleNumbers
+	SubtractIntNumbers
+	SubtractDoubleNumbers
+	MultiplyIntNumbers
+	MultiplyDoubleNumbers
+	DivideIntNumbers
+	DivideDoubleNumbers
