@@ -1,33 +1,28 @@
 #include <iostream>
 #include <windows.h>
 
-#include "OperationsApi.h"
-#include "ObserverApi.h"
+//#include "OperationsApi.h"
+//#include "ObserverApi.h"
+#include "LibrayTypeDefinitions.h"
+#include "DynamicLibraryManager.h"
 
 // Functions definition.
-typedef int     (*ADD_INT_NUMBERS)(int, int);
-typedef double  (*ADD_DOUBLE_NUMBERS)(double, double);
-typedef int     (*SUBTRACT_INT_NUMBERS)(int, int);
-typedef double  (*SUBTRACT_DOUBLE_NUMBERS)(double, double);
-typedef int     (*MULTIPLY_INT_NUMBERS)(int, int);
-typedef double  (*MULTIPLY_DOUBLE_NUMBERS)(double, double);
-typedef int     (*DIVIDE_INT_NUMBERS)(int, int);
-typedef double  (*DIVIDE_DOUBLE_NUMBERS)(double, double);
 
 int main()
 {
-    HINSTANCE hinstDLL = LoadLibrary(L"dynamiclibrary.dll");
-    BOOL fFreeDLL = false;
+    DynamicLibraryManager dynamic_library_manager(L"dynamiclibrary.dll");
 
-    if (hinstDLL == NULL)
+    HINSTANCE dll_handle = dynamic_library_manager.load_library();
+
+    if (dll_handle == NULL)
     {
         std::cout << "Impossible load library 'dynamiclibrary.dll'" << std::endl;
 
         return -1;
     }
 
-    ADD_INT_NUMBERS add_int_numbers = (ADD_INT_NUMBERS)GetProcAddress(hinstDLL, "AddIntNumbers");
-    ADD_DOUBLE_NUMBERS add_double_numbers = (ADD_DOUBLE_NUMBERS)GetProcAddress(hinstDLL, "AddDoubleNumbers");
+    ADD_INT_NUMBERS add_int_numbers = dynamic_library_manager.get_add_int_numbers_function();
+    ADD_DOUBLE_NUMBERS add_double_numbers = dynamic_library_manager.get_add_double_numbers_function();
 
     if (add_int_numbers == NULL)
     {
@@ -49,15 +44,11 @@ int main()
     std::cout << "ResultA: " << resultA << std::endl;
     std::cout << "resultB: " << resultB << std::endl;
 
-    fFreeDLL = FreeLibrary(hinstDLL);
-
-    std::cout << "Free dll library operation result: " << fFreeDLL << std::endl;
-
     return 0;
 
-    // Code refactor to use loading DLL library.
+     //Code refactor to use loading DLL library.
     
-    // Consuming dynamic library: Using OperationsApi classes.
+     //Consuming dynamic library: Using OperationsApi classes.
 
     //std::cout << OperationsApi::Add::numbers(22.4, 3.6) << std::endl;
     //std::cout << OperationsApi::Add::numbers(22, 3) << std::endl;
