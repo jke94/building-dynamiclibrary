@@ -17,11 +17,11 @@
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
         <Content Condition="'$(Platform)' == 'x64' and $(Configuration) == 'Debug'" 
-                Include="$(MSBuildThisFileDirectory)libs\x64\Release\dynamiclibrary.dll" >
+                Include="$(MSBuildThisFileDirectory)libs\x64\Debug\dynamiclibrary.dll" >
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
         <Content Condition="'$(Platform)' == 'Win32' and $(Configuration) == 'Debug'" 
-                Include="$(MSBuildThisFileDirectory)libs\x86\Release\dynamiclibrary.dll" >
+                Include="$(MSBuildThisFileDirectory)libs\x86\Debug\dynamiclibrary.dll" >
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
         
