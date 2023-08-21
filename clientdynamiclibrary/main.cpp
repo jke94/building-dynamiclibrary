@@ -1,7 +1,6 @@
 #include <iostream>
 #include <windows.h>
 
-//#include "OperationsApi.h"
 //#include "ObserverApi.h"
 #include "LibrayTypeDefinitions.h"
 #include "DynamicLibraryManager.h"
@@ -23,6 +22,9 @@ int main()
 
     ADD_INT_NUMBERS add_int_numbers = dynamic_library_manager.get_add_int_numbers_function();
     ADD_DOUBLE_NUMBERS add_double_numbers = dynamic_library_manager.get_add_double_numbers_function();
+    SUBTRACT_INT_NUMBERS subtract_int_numbers = dynamic_library_manager.get_subtract_int_numbers_function();
+    MULTIPLY_DOUBLE_NUMBERS multiply_double_numbers = dynamic_library_manager.get_multiply_double_numbers_function();
+    DIVIDE_INT_NUMBERS divide_int_numbers = dynamic_library_manager.get_divide_int_numbers_function();
 
     if (add_int_numbers == NULL)
     {
@@ -38,11 +40,38 @@ int main()
         return -1;
     }
 
+    if (subtract_int_numbers == NULL)
+    {
+        std::cout << "Impossible load function 'SubtractIntNumbers' in library 'dynamiclibrary.dll'" << std::endl;
+
+        return -1;
+    }
+
+    if (multiply_double_numbers == NULL)
+    {
+        std::cout << "Impossible load function 'MultiplyDoubleNumbers' in library 'dynamiclibrary.dll'" << std::endl;
+
+        return -1;
+    }
+
+    if (divide_int_numbers == NULL)
+    {
+        std::cout << "Impossible load function 'DivideIntNumbers' in library 'dynamiclibrary.dll'" << std::endl;
+
+        return -1;
+    }
+
     int resultA = add_int_numbers(3, 64);
     double resultB = add_double_numbers(7.6, 8.6);
+    int resultC = subtract_int_numbers(20, 13);
+    double resultD = multiply_double_numbers(2.5, 3);
+    int resultE = divide_int_numbers(32, 4);
 
     std::cout << "ResultA: " << resultA << std::endl;
     std::cout << "resultB: " << resultB << std::endl;
+    std::cout << "ResultC: " << resultC << std::endl;
+    std::cout << "resultD: " << resultD << std::endl;
+    std::cout << "ResultE: " << resultE << std::endl;
 
     return 0;
 
