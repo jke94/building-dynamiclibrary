@@ -138,3 +138,33 @@ DIVIDE_DOUBLE_NUMBERS DynamicLibraryManager::get_divide_double_numbers_function(
 
     return (DIVIDE_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "DivideDoubleNumbers");
 }
+
+SUBJECT DynamicLibraryManager::get_create_subject_function()
+{
+    if (_handle_dll == NULL)
+    {
+        return NULL;
+    }
+
+    return (SUBJECT)GetProcAddress(_handle_dll, "Create_subject");
+}
+
+OBSERVER DynamicLibraryManager::get_create_observer_function()
+{
+    if (_handle_dll == NULL)
+    {
+        return NULL;
+    }
+
+    return (OBSERVER)GetProcAddress(_handle_dll, "Create_observer");
+}
+
+CREATE_MESSAGE DynamicLibraryManager::get_create_message_function()
+{
+    if (_handle_dll == NULL)
+    {
+        return NULL;
+    }
+
+    return (CREATE_MESSAGE)GetProcAddress(_handle_dll, "Create_message");
+}

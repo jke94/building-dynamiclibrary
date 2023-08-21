@@ -161,6 +161,7 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Multiply.cpp" />
     <ClCompile Include="Observer.cpp" />
+    <ClCompile Include="ObserverApiImplementation.cpp" />
     <ClCompile Include="OperationsApiImplementation.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

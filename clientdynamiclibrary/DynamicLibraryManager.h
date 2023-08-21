@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <windows.h>
-
+#include "ObserverApi.h"
 #include "LibrayTypeDefinitions.h"
 
 class DynamicLibraryManager
@@ -24,6 +24,10 @@ class DynamicLibraryManager
 		MULTIPLY_DOUBLE_NUMBERS get_multiply_double_numbers_function();
 		DIVIDE_INT_NUMBERS get_divide_int_numbers_function();
 		DIVIDE_DOUBLE_NUMBERS get_divide_double_numbers_function();
+
+		SUBJECT get_create_subject_function();
+		OBSERVER get_create_observer_function();
+		CREATE_MESSAGE get_create_message_function();
 
 	private:
 		LPCWSTR _dynamic_library_name = {};

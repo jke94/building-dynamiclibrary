@@ -11,14 +11,14 @@
 
 namespace ObserverApi
 {
-	class DYNAMICLIBRARY_API IObserver
+	class IObserver
 	{
 	    public:
 		    virtual ~IObserver() {};
 		    virtual void Update(const std::string& message_from_subject) = 0;
 	};
 
-	class DYNAMICLIBRARY_API ISubject
+	class ISubject
 	{
 	    public:
 		    virtual ~ISubject() {};
@@ -27,7 +27,7 @@ namespace ObserverApi
 		    virtual void Notify() = 0;
 	};
 
-    class DYNAMICLIBRARY_API Subject : public ISubject
+    class Subject : public ISubject
     {
         public:
 
@@ -56,7 +56,7 @@ namespace ObserverApi
             std::string message_;
     };
 
-    class DYNAMICLIBRARY_API Observer : public IObserver
+    class Observer : public IObserver
     {
         public:
             Observer(int id_number, Subject& subject);

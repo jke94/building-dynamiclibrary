@@ -8,3 +8,6 @@ EXPORTS
 	MultiplyDoubleNumbers
 	DivideIntNumbers
 	DivideDoubleNumbers
+	Create_subject
+	Create_observer
+	Create_message

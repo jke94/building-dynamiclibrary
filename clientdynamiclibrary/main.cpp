@@ -73,35 +73,23 @@ int main()
     std::cout << "resultD: " << resultD << std::endl;
     std::cout << "ResultE: " << resultE << std::endl;
 
-    return 0;
-
-     //Code refactor to use loading DLL library.
-    
-     //Consuming dynamic library: Using OperationsApi classes.
-
-    //std::cout << OperationsApi::Add::numbers(22.4, 3.6) << std::endl;
-    //std::cout << OperationsApi::Add::numbers(22, 3) << std::endl;
-
-    //std::cout << OperationsApi::Subtract::numbers(22.4, 3.6) << std::endl;
-    //std::cout << OperationsApi::Subtract::numbers(22, 3) << std::endl;
-
-    //std::cout << OperationsApi::Multiply::numbers(22.4, 3.6) << std::endl;
-    //std::cout << OperationsApi::Multiply::numbers(22, 3) << std::endl;
-
-    //std::cout << OperationsApi::Divide::numbers(22.4, 3.6) << std::endl;
-    //std::cout << OperationsApi::Divide::numbers(22, 3) << std::endl;
-
     //// Consuming dynamic library: Using ObserverApi classes.
 
-    //ObserverApi::Subject *subject = new ObserverApi::Subject;
+    SUBJECT create_subject = dynamic_library_manager.get_create_subject_function();
+    OBSERVER create_observer = dynamic_library_manager.get_create_observer_function();
+    CREATE_MESSAGE create_message = dynamic_library_manager.get_create_message_function();
 
-    //ObserverApi::Observer* observer1 = new ObserverApi::Observer(1, *subject);
-    //ObserverApi::Observer* observer2 = new ObserverApi::Observer(2, *subject);
-    //ObserverApi::Observer* observer3 = new ObserverApi::Observer(3, *subject);
-    //ObserverApi::Observer* observer4;
-    //ObserverApi::Observer* observer5;
+    ObserverApi::Subject* subject = create_subject();
+   
+    ObserverApi::Observer* observer1 = create_observer(1, *subject);
+    ObserverApi::Observer* observer2 = create_observer(2, *subject);
+    ObserverApi::Observer* observer3 = create_observer(3, *subject);
+    ObserverApi::Observer* observer4;
+    ObserverApi::Observer* observer5;
 
-    //subject->CreateMessage("Hello World! :D");
+    create_message(*subject, "Hello World! :D");
+    create_message(*subject, "Hello World! :D again!!");
+
     //observer3->RemoveMeFromTheList();
 
     //subject->CreateMessage("The weather is hot today! :p");
@@ -118,10 +106,10 @@ int main()
 
     //delete observer5;
     //delete observer4;
-    //delete observer3;
-    //delete observer2;
-    //delete observer1;
-    //delete subject;
+    delete observer3;
+    delete observer2;
+    delete observer1;
+    delete subject;
 
     return 0;
 }
