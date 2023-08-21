@@ -78,34 +78,35 @@ int main()
     SUBJECT create_subject = dynamic_library_manager.get_create_subject_function();
     OBSERVER create_observer = dynamic_library_manager.get_create_observer_function();
     CREATE_MESSAGE create_message = dynamic_library_manager.get_create_message_function();
+    REMOVEME_FROM_THE_LIST removeme_from_the_list = dynamic_library_manager.get_removeme_from_the_list_function();
 
     ObserverApi::Subject* subject = create_subject();
    
     ObserverApi::Observer* observer1 = create_observer(1, *subject);
     ObserverApi::Observer* observer2 = create_observer(2, *subject);
     ObserverApi::Observer* observer3 = create_observer(3, *subject);
-    ObserverApi::Observer* observer4;
-    ObserverApi::Observer* observer5;
+    ObserverApi::Observer* observer4 = nullptr;
+    ObserverApi::Observer* observer5 = nullptr;
 
     create_message(*subject, "Hello World! :D");
     create_message(*subject, "Hello World! :D again!!");
 
-    //observer3->RemoveMeFromTheList();
+    removeme_from_the_list(*observer3);
 
-    //subject->CreateMessage("The weather is hot today! :p");
-    //observer4 = new ObserverApi::Observer(4, *subject);
+    create_message(*subject, "The weather is hot today! :p");
+    observer4 = create_observer(4, *subject);
+    
+    removeme_from_the_list(*observer2);
+    observer5 = create_observer(5, *subject);
 
-    //observer2->RemoveMeFromTheList();
-    //observer5 = new ObserverApi::Observer(5, *subject);
+    create_message(*subject, "My new car is great! ;)");
+    removeme_from_the_list(*observer5);
 
-    //subject->CreateMessage("My new car is great! ;)");
-    //observer5->RemoveMeFromTheList();
+    removeme_from_the_list(*observer4);
+    removeme_from_the_list(*observer1);
 
-    //observer4->RemoveMeFromTheList();
-    //observer1->RemoveMeFromTheList();
-
-    //delete observer5;
-    //delete observer4;
+    delete observer5;
+    delete observer4;
     delete observer3;
     delete observer2;
     delete observer1;

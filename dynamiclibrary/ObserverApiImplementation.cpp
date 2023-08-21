@@ -14,3 +14,8 @@ DYNAMICLIBRARY_API void Create_message(ObserverApi::Subject& subject, std::strin
 {
 	subject.CreateMessage(message);
 }
+
+DYNAMICLIBRARY_API void Removeme_from_the_list(ObserverApi::Observer& observer)
+{
+	observer.RemoveMeFromTheList();
+}

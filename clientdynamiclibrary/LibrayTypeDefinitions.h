@@ -14,5 +14,5 @@ typedef double  (*DIVIDE_DOUBLE_NUMBERS)(double, double);
 typedef ObserverApi::Subject* (*SUBJECT)();
 typedef ObserverApi::Observer* (*OBSERVER)(int id, ObserverApi::Subject& subject);
 typedef void (*CREATE_MESSAGE)(ObserverApi::Subject& subject, std::string message);
-// TODO: RemoveMeFrom from the list.
+typedef void (*REMOVEME_FROM_THE_LIST)(ObserverApi::Observer& observer);
 // TODO: Investigate //observer5 = new ObserverApi::Observer(5, *subject);

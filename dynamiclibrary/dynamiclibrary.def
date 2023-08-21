@@ -11,3 +11,4 @@ EXPORTS
 	Create_subject
 	Create_observer
 	Create_message
+	Removeme_from_the_list

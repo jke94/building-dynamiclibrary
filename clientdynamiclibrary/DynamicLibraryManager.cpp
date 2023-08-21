@@ -168,3 +168,13 @@ CREATE_MESSAGE DynamicLibraryManager::get_create_message_function()
 
     return (CREATE_MESSAGE)GetProcAddress(_handle_dll, "Create_message");
 }
+
+REMOVEME_FROM_THE_LIST DynamicLibraryManager::get_removeme_from_the_list_function()
+{
+    if (_handle_dll == NULL)
+    {
+        return NULL;
+    }
+
+    return (REMOVEME_FROM_THE_LIST)GetProcAddress(_handle_dll, "Removeme_from_the_list");
+}
