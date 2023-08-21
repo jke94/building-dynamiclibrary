@@ -78,3 +78,63 @@ ADD_DOUBLE_NUMBERS DynamicLibraryManager::get_add_double_numbers_function()
 
     return (ADD_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "AddDoubleNumbers");
 }
+
+SUBTRACT_INT_NUMBERS DynamicLibraryManager::get_subtract_int_numbers_function()
+{
+    if (_handle_dll == NULL)
+    {
+        return NULL;
+    }
+
+    return (SUBTRACT_INT_NUMBERS)GetProcAddress(_handle_dll, "SubtractIntNumbers");
+}
+
+SUBTRACT_DOUBLE_NUMBERS DynamicLibraryManager::get_subtract_double_numbers_function()
+{
+    if (_handle_dll == NULL)
+    {
+        return NULL;
+    }
+
+    return (SUBTRACT_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "SubtractDoubleNumbers");
+}
+
+MULTIPLY_INT_NUMBERS DynamicLibraryManager::get_multiply_int_numbers_function()
+{
+    if (_handle_dll == NULL)
+    {
+        return NULL;
+    }
+
+    return (MULTIPLY_INT_NUMBERS)GetProcAddress(_handle_dll, "MultiplyIntNumbers");
+}
+
+MULTIPLY_DOUBLE_NUMBERS DynamicLibraryManager::get_multiply_double_numbers_function()
+{
+    if (_handle_dll == NULL)
+    {
+        return NULL;
+    }
+
+    return (MULTIPLY_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "MultiplyDoubleNumbers");
+}
+
+DIVIDE_INT_NUMBERS DynamicLibraryManager::get_divide_int_numbers_function()
+{
+    if (_handle_dll == NULL)
+    {
+        return NULL;
+    }
+
+    return (DIVIDE_INT_NUMBERS)GetProcAddress(_handle_dll, "DivideIntNumbers");
+}
+
+DIVIDE_DOUBLE_NUMBERS DynamicLibraryManager::get_divide_double_numbers_function()
+{
+    if (_handle_dll == NULL)
+    {
+        return NULL;
+    }
+
+    return (DIVIDE_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "DivideDoubleNumbers");
+}
