@@ -2,4 +2,13 @@
 
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 // Windows Header Files
-#include <windows.h>
+
+
+#ifdef __linux__ 
+    //linux code goes here
+#elif _WIN32
+    // windows code goes here
+    #include <windows.h>
+#else
+
+#endif
