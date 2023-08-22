@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" 
-    xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
     <ItemDefinitionGroup>
         <ClCompile>
-            <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)native\interface\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+            <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)\interface\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
         </ClCompile>
     </ItemDefinitionGroup>
-    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-        <ClCompile>
-            <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-        </ClCompile>
-        <Link>
-            <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)native\libs\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-            <!-- Put your lib name here -->
-            <AdditionalDependencies>dynamiclibrary.lib;%(AdditionalDependencies)</AdditionalDependencies>
-        </Link>
-    </ItemDefinitionGroup>
-    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-        <ClCompile>
-            <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-        </ClCompile>
-        <Link>
-            <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)native\libs\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-            <!-- Put your lib name here -->
-            <AdditionalDependencies>dynamiclibrary.lib;%(AdditionalDependencies)</AdditionalDependencies>
-        </Link>
-    </ItemDefinitionGroup>
+
+    <ItemGroup>
+        <Content Condition="'$(Platform)' == 'x64' and $(Configuration) == 'Release'" 
+                Include="$(MSBuildThisFileDirectory)libs\x64\Release\dynamiclibrary.dll" >
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Condition="'$(Platform)' == 'Win32' and $(Configuration) == 'Release'" 
+                Include="$(MSBuildThisFileDirectory)libs\x86\Release\dynamiclibrary.dll" >
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Condition="'$(Platform)' == 'x64' and $(Configuration) == 'Debug'" 
+                Include="$(MSBuildThisFileDirectory)libs\x64\Debug\dynamiclibrary.dll" >
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Condition="'$(Platform)' == 'Win32' and $(Configuration) == 'Debug'" 
+                Include="$(MSBuildThisFileDirectory)libs\x86\Debug\dynamiclibrary.dll" >
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        
+    </ItemGroup>
 </Project>
