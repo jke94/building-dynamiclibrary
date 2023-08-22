@@ -1,11 +1,8 @@
 #include <iostream>
 #include <windows.h>
 
-//#include "ObserverApi.h"
 #include "LibrayTypeDefinitions.h"
 #include "DynamicLibraryManager.h"
-
-// Functions definition.
 
 int main()
 {

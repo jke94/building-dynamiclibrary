@@ -2,6 +2,7 @@
 #include "ObserverApi.h"
 
 // Functions definition.
+
 typedef int     (*ADD_INT_NUMBERS)(int, int);
 typedef double  (*ADD_DOUBLE_NUMBERS)(double, double);
 typedef int     (*SUBTRACT_INT_NUMBERS)(int, int);
@@ -15,4 +16,3 @@ typedef ObserverApi::Subject* (*SUBJECT)();
 typedef ObserverApi::Observer* (*OBSERVER)(int id, ObserverApi::Subject& subject);
 typedef void (*CREATE_MESSAGE)(ObserverApi::Subject& subject, std::string message);
 typedef void (*REMOVEME_FROM_THE_LIST)(ObserverApi::Observer& observer);
-// TODO: Investigate //observer5 = new ObserverApi::Observer(5, *subject);
