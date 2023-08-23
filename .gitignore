@@ -375,3 +375,7 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
+
+# Dynamic library: Linux binaries files.
+
+dynamiclibrary/build/
