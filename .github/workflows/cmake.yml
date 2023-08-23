@@ -1,4 +1,4 @@
-name: CI
+name: Linux build
 
 on: push
 
@@ -12,3 +12,15 @@ jobs:
             
             - name: CMake version
               run: cmake --version
+
+            - name: Create build directory
+              run: mkdir build
+              working-directory: ./dynamiclibrary
+
+            - name: CMake
+              run: cmake ..
+              working-directory: ./dynamiclibrary/build
+
+            - name: Run Makefile
+              run: make
+              working-directory: ./dynamiclibrary/build
