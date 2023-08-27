@@ -1,22 +1,30 @@
 #include "DynamicLibraryManager.h"
 
+#ifdef __linux__ 
+
+DynamicLibraryManager::DynamicLibraryManager(const char *filename)
+{
+    _handle_dll = dlopen(filename, RTLD_LAZY);
+}
+
+void* load_library()
+{
+    if (!_handle_dll) 
+    {
+        std::cout << "Could not open the library '"<< _handle_dll <<"'" << std::endl;
+
+        return nullptr;
+    }
+
+    return _handle_dll;
+}
+
+#elif _WIN32
+
 DynamicLibraryManager::DynamicLibraryManager(
     LPCWSTR dynamic_library_name)
 {
 	_dynamic_library_name = dynamic_library_name;
-}
-
-DynamicLibraryManager::~DynamicLibraryManager()
-{
-    if (_handle_dll != NULL)
-    {
-        BOOL fFreeDLL = FreeLibrary(_handle_dll);
-
-        std::wcout << "Free dll library '" << _dynamic_library_name <<
-            "' operation result : " << fFreeDLL << std::endl;
-
-        _handle_dll = NULL;
-    }
 }
 
 HINSTANCE DynamicLibraryManager::load_library()
@@ -57,6 +65,31 @@ LPCWSTR DynamicLibraryManager::get_dynamic_library_name()
     }
 
     return _dynamic_library_name;
+}
+
+#endif
+
+DynamicLibraryManager::~DynamicLibraryManager()
+{
+
+#ifdef __linux__ 
+
+    // TODO:
+
+#elif _WIN32
+
+    if (_handle_dll != NULL)
+    {
+        BOOL fFreeDLL = FreeLibrary(_handle_dll);
+
+        std::wcout << "Free dll library '" << _dynamic_library_name <<
+            "' operation result : " << fFreeDLL << std::endl;
+
+        _handle_dll = NULL;
+    }
+
+#endif
+
 }
 
 ADD_INT_NUMBERS DynamicLibraryManager::get_add_int_numbers_function()

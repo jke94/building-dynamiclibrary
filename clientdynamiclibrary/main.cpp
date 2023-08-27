@@ -1,11 +1,33 @@
 #include <iostream>
-#include <windows.h>
+
+#ifdef __linux__ 
+    #include <dlfcn.h>
+#elif _WIN32
+    #include <windows.h>
+#else
+
+#endif
 
 #include "LibrayTypeDefinitions.h"
 #include "DynamicLibraryManager.h"
 
 int main()
 {
+
+#ifdef __linux__ 
+
+    DynamicLibraryManager dynamic_library_manager("libdynamiclibrary.so");
+    void* dll_handle = dynamic_library_manager.load_library();
+
+    if (dll_handle == NULL)
+    {
+        std::cout << "Impossible load library 'libdynamiclibrary.so'" << std::endl;
+
+        return -1;
+    }
+
+#elif _WIN32
+
     DynamicLibraryManager dynamic_library_manager(L"dynamiclibrary.dll");
 
     HINSTANCE dll_handle = dynamic_library_manager.load_library();
@@ -16,6 +38,11 @@ int main()
 
         return -1;
     }
+
+#else
+
+#endif
+
 
     ADD_INT_NUMBERS add_int_numbers = dynamic_library_manager.get_add_int_numbers_function();
     ADD_DOUBLE_NUMBERS add_double_numbers = dynamic_library_manager.get_add_double_numbers_function();

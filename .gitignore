@@ -379,3 +379,4 @@ _deps
 # Dynamic library: Linux binaries files.
 
 dynamiclibrary/build/
+*.so
