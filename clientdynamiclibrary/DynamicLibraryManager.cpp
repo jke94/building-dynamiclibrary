@@ -1,13 +1,13 @@
 #include "DynamicLibraryManager.h"
 
-#ifdef __linux__ 
+#ifdef __linux__
 
 DynamicLibraryManager::DynamicLibraryManager(const char *filename)
 {
     _handle_dll = dlopen(filename, RTLD_LAZY);
 }
 
-void* load_library()
+void* DynamicLibraryManager::load_library()
 {
     if (!_handle_dll) 
     {
@@ -96,118 +96,128 @@ ADD_INT_NUMBERS DynamicLibraryManager::get_add_int_numbers_function()
 {
     if (_handle_dll == NULL)
     {
-        return NULL;
+        throw std::logic_error("'_handle_dll' is empty. Call 'load_library' function and check output.");
     }
 
-    return (ADD_INT_NUMBERS)GetProcAddress(_handle_dll, "AddIntNumbers");
+#ifdef __linux__ 
+
+    ADD_INT_NUMBERS add_numbers = reinterpret_cast<ADD_INT_NUMBERS>(dlsym(_handle_dll, "AddIntNumbers"));
+
+#elif _WIN32
+
+    ADD_INT_NUMBERS add_numbers = reinterpret_cast<ADD_INT_NUMBERS>(GetProcAddress(_handle_dll, "AddIntNumbers"));
+
+#endif
+
+    return add_numbers;
 }
 
-ADD_DOUBLE_NUMBERS DynamicLibraryManager::get_add_double_numbers_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+// ADD_DOUBLE_NUMBERS DynamicLibraryManager::get_add_double_numbers_function()
+// {
+//     if (_handle_dll == NULL)
+//     {
+//         return NULL;
+//     }
 
-    return (ADD_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "AddDoubleNumbers");
-}
+//     return (ADD_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "AddDoubleNumbers");
+// }
 
-SUBTRACT_INT_NUMBERS DynamicLibraryManager::get_subtract_int_numbers_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+// SUBTRACT_INT_NUMBERS DynamicLibraryManager::get_subtract_int_numbers_function()
+// {
+//     if (_handle_dll == NULL)
+//     {
+//         return NULL;
+//     }
 
-    return (SUBTRACT_INT_NUMBERS)GetProcAddress(_handle_dll, "SubtractIntNumbers");
-}
+//     return (SUBTRACT_INT_NUMBERS)GetProcAddress(_handle_dll, "SubtractIntNumbers");
+// }
 
-SUBTRACT_DOUBLE_NUMBERS DynamicLibraryManager::get_subtract_double_numbers_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+// SUBTRACT_DOUBLE_NUMBERS DynamicLibraryManager::get_subtract_double_numbers_function()
+// {
+//     if (_handle_dll == NULL)
+//     {
+//         return NULL;
+//     }
 
-    return (SUBTRACT_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "SubtractDoubleNumbers");
-}
+//     return (SUBTRACT_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "SubtractDoubleNumbers");
+// }
 
-MULTIPLY_INT_NUMBERS DynamicLibraryManager::get_multiply_int_numbers_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+// MULTIPLY_INT_NUMBERS DynamicLibraryManager::get_multiply_int_numbers_function()
+// {
+//     if (_handle_dll == NULL)
+//     {
+//         return NULL;
+//     }
 
-    return (MULTIPLY_INT_NUMBERS)GetProcAddress(_handle_dll, "MultiplyIntNumbers");
-}
+//     return (MULTIPLY_INT_NUMBERS)GetProcAddress(_handle_dll, "MultiplyIntNumbers");
+// }
 
-MULTIPLY_DOUBLE_NUMBERS DynamicLibraryManager::get_multiply_double_numbers_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+// MULTIPLY_DOUBLE_NUMBERS DynamicLibraryManager::get_multiply_double_numbers_function()
+// {
+//     if (_handle_dll == NULL)
+//     {
+//         return NULL;
+//     }
 
-    return (MULTIPLY_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "MultiplyDoubleNumbers");
-}
+//     return (MULTIPLY_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "MultiplyDoubleNumbers");
+// }
 
-DIVIDE_INT_NUMBERS DynamicLibraryManager::get_divide_int_numbers_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+// DIVIDE_INT_NUMBERS DynamicLibraryManager::get_divide_int_numbers_function()
+// {
+//     if (_handle_dll == NULL)
+//     {
+//         return NULL;
+//     }
 
-    return (DIVIDE_INT_NUMBERS)GetProcAddress(_handle_dll, "DivideIntNumbers");
-}
+//     return (DIVIDE_INT_NUMBERS)GetProcAddress(_handle_dll, "DivideIntNumbers");
+// }
 
-DIVIDE_DOUBLE_NUMBERS DynamicLibraryManager::get_divide_double_numbers_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+// DIVIDE_DOUBLE_NUMBERS DynamicLibraryManager::get_divide_double_numbers_function()
+// {
+//     if (_handle_dll == NULL)
+//     {
+//         return NULL;
+//     }
 
-    return (DIVIDE_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "DivideDoubleNumbers");
-}
+//     return (DIVIDE_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "DivideDoubleNumbers");
+// }
 
-SUBJECT DynamicLibraryManager::get_create_subject_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+// SUBJECT DynamicLibraryManager::get_create_subject_function()
+// {
+//     if (_handle_dll == NULL)
+//     {
+//         return NULL;
+//     }
 
-    return (SUBJECT)GetProcAddress(_handle_dll, "Create_subject");
-}
+//     return (SUBJECT)GetProcAddress(_handle_dll, "Create_subject");
+// }
 
-OBSERVER DynamicLibraryManager::get_create_observer_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+// OBSERVER DynamicLibraryManager::get_create_observer_function()
+// {
+//     if (_handle_dll == NULL)
+//     {
+//         return NULL;
+//     }
 
-    return (OBSERVER)GetProcAddress(_handle_dll, "Create_observer");
-}
+//     return (OBSERVER)GetProcAddress(_handle_dll, "Create_observer");
+// }
 
-CREATE_MESSAGE DynamicLibraryManager::get_create_message_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+// CREATE_MESSAGE DynamicLibraryManager::get_create_message_function()
+// {
+//     if (_handle_dll == NULL)
+//     {
+//         return NULL;
+//     }
 
-    return (CREATE_MESSAGE)GetProcAddress(_handle_dll, "Create_message");
-}
+//     return (CREATE_MESSAGE)GetProcAddress(_handle_dll, "Create_message");
+// }
 
-REMOVEME_FROM_THE_LIST DynamicLibraryManager::get_removeme_from_the_list_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+// REMOVEME_FROM_THE_LIST DynamicLibraryManager::get_removeme_from_the_list_function()
+// {
+//     if (_handle_dll == NULL)
+//     {
+//         return NULL;
+//     }
 
-    return (REMOVEME_FROM_THE_LIST)GetProcAddress(_handle_dll, "Removeme_from_the_list");
-}
+//     return (REMOVEME_FROM_THE_LIST)GetProcAddress(_handle_dll, "Removeme_from_the_list");
+// }
