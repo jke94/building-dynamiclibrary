@@ -14,10 +14,10 @@ include_directories(
 
 add_library(dynamiclibrary SHARED ${MY_CPP_SOURCES})
 
-add_executable(Main 
+add_executable(clientdynamiclibrary 
     clientdynamiclibrary/main.cpp
     clientdynamiclibrary/DynamicLibraryManager.cpp
 )
 
-target_link_libraries(Main 
+target_link_libraries(clientdynamiclibrary 
     dynamiclibrary)
