@@ -4,17 +4,32 @@
 
 DynamicLibraryManager::DynamicLibraryManager(const char *filename)
 {
-    _handle_dll = dlopen(filename, RTLD_LAZY);
+    _dynamic_library_name = filename;
 }
 
 void* DynamicLibraryManager::load_library()
 {
-    if (!_handle_dll) 
+
+    if (_dynamic_library_name == nullptr)
+    {
+        return NULL;
+    }
+
+    if (!_handle_dll)
+    {
+        return _handle_dll;
+    }
+
+    _handle_dll = dlopen(_dynamic_library_name, RTLD_LAZY);
+
+    if (_handle_dll == nullptr)
     {
         std::cout << "Could not open the library '"<< _handle_dll <<"'" << std::endl;
 
         return nullptr;
     }
+
+    std::cout << "Loaded library '" << _dynamic_library_name << "'" << std::endl;
 
     return _handle_dll;
 }
@@ -74,7 +89,15 @@ DynamicLibraryManager::~DynamicLibraryManager()
 
 #ifdef __linux__ 
 
-    // TODO:
+    if (_handle_dll)
+    {
+        int fFreeDLL = dlclose(_handle_dll);
+
+        std::wcout << "Free so library '" << _dynamic_library_name <<
+            "' operation result : " << fFreeDLL << std::endl;
+
+        _handle_dll = NULL;
+}
 
 #elif _WIN32
 
@@ -111,76 +134,6 @@ OPERATION DynamicLibraryManager::create_opearation()
 
     return operation;
 }
-
-// ADD_DOUBLE_NUMBERS DynamicLibraryManager::get_add_double_numbers_function()
-// {
-//     if (_handle_dll == NULL)
-//     {
-//         return NULL;
-//     }
-
-//     return (ADD_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "AddDoubleNumbers");
-// }
-
-// SUBTRACT_INT_NUMBERS DynamicLibraryManager::get_subtract_int_numbers_function()
-// {
-//     if (_handle_dll == NULL)
-//     {
-//         return NULL;
-//     }
-
-//     return (SUBTRACT_INT_NUMBERS)GetProcAddress(_handle_dll, "SubtractIntNumbers");
-// }
-
-// SUBTRACT_DOUBLE_NUMBERS DynamicLibraryManager::get_subtract_double_numbers_function()
-// {
-//     if (_handle_dll == NULL)
-//     {
-//         return NULL;
-//     }
-
-//     return (SUBTRACT_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "SubtractDoubleNumbers");
-// }
-
-// MULTIPLY_INT_NUMBERS DynamicLibraryManager::get_multiply_int_numbers_function()
-// {
-//     if (_handle_dll == NULL)
-//     {
-//         return NULL;
-//     }
-
-//     return (MULTIPLY_INT_NUMBERS)GetProcAddress(_handle_dll, "MultiplyIntNumbers");
-// }
-
-// MULTIPLY_DOUBLE_NUMBERS DynamicLibraryManager::get_multiply_double_numbers_function()
-// {
-//     if (_handle_dll == NULL)
-//     {
-//         return NULL;
-//     }
-
-//     return (MULTIPLY_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "MultiplyDoubleNumbers");
-// }
-
-// DIVIDE_INT_NUMBERS DynamicLibraryManager::get_divide_int_numbers_function()
-// {
-//     if (_handle_dll == NULL)
-//     {
-//         return NULL;
-//     }
-
-//     return (DIVIDE_INT_NUMBERS)GetProcAddress(_handle_dll, "DivideIntNumbers");
-// }
-
-// DIVIDE_DOUBLE_NUMBERS DynamicLibraryManager::get_divide_double_numbers_function()
-// {
-//     if (_handle_dll == NULL)
-//     {
-//         return NULL;
-//     }
-
-//     return (DIVIDE_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "DivideDoubleNumbers");
-// }
 
 // SUBJECT DynamicLibraryManager::get_create_subject_function()
 // {

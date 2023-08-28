@@ -23,7 +23,7 @@ class DynamicLibraryManager
     private:
 
         void* _handle_dll;
-        char* _dynamic_library_name;
+        const char* _dynamic_library_name;
 
     public:
         DynamicLibraryManager(const char *filename);
