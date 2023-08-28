@@ -92,7 +92,7 @@ DynamicLibraryManager::~DynamicLibraryManager()
 
 }
 
-ADD_INT_NUMBERS DynamicLibraryManager::get_add_int_numbers_function()
+OPERATION DynamicLibraryManager::create_opearation()
 {
     if (_handle_dll == NULL)
     {
@@ -101,15 +101,15 @@ ADD_INT_NUMBERS DynamicLibraryManager::get_add_int_numbers_function()
 
 #ifdef __linux__ 
 
-    ADD_INT_NUMBERS add_numbers = reinterpret_cast<ADD_INT_NUMBERS>(dlsym(_handle_dll, "AddIntNumbers"));
+    OPERATION operation = reinterpret_cast<OPERATION>(dlsym(_handle_dll, "CreateOperation"));
 
 #elif _WIN32
 
-    ADD_INT_NUMBERS add_numbers = reinterpret_cast<ADD_INT_NUMBERS>(GetProcAddress(_handle_dll, "AddIntNumbers"));
+    OPERATION operation = reinterpret_cast<OPERATION>(GetProcAddress(_handle_dll, "CreateOperation"));
 
 #endif
 
-    return add_numbers;
+    return operation;
 }
 
 // ADD_DOUBLE_NUMBERS DynamicLibraryManager::get_add_double_numbers_function()

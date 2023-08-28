@@ -43,16 +43,15 @@ int main()
 
 #endif
 
-
-    ADD_INT_NUMBERS add_int_numbers = dynamic_library_manager.get_add_int_numbers_function();
+    OPERATION create_operation = dynamic_library_manager.create_opearation();
     // ADD_DOUBLE_NUMBERS add_double_numbers = dynamic_library_manager.get_add_double_numbers_function();
     // SUBTRACT_INT_NUMBERS subtract_int_numbers = dynamic_library_manager.get_subtract_int_numbers_function();
     // MULTIPLY_DOUBLE_NUMBERS multiply_double_numbers = dynamic_library_manager.get_multiply_double_numbers_function();
     // DIVIDE_INT_NUMBERS divide_int_numbers = dynamic_library_manager.get_divide_int_numbers_function();
 
-    if (add_int_numbers == NULL)
+    if (create_operation == NULL)
     {
-        std::cout << "Impossible load function 'AddIntNumbers' in library 'dynamiclibrary.dll'" << std::endl;
+        std::cout << "Impossible load function 'CreateOperation' in library 'dynamiclibrary.dll'" << std::endl;
 
         return -1;
     }
@@ -85,17 +84,19 @@ int main()
     //     return -1;
     // }
 
-    int resultA = add_int_numbers(3, 64);
-    // double resultB = add_double_numbers(7.6, 8.6);
-    // int resultC = subtract_int_numbers(20, 13);
-    // double resultD = multiply_double_numbers(2.5, 3);
-    // int resultE = divide_int_numbers(32, 4);
+    IOperation* operation = create_operation();
+
+    int resultA = operation->AddNumbers(3, 64);
+    double resultB = operation->AddNumbers(7.6, 8.6);
+    int resultC = operation->SubtractNumbers(20, 13);
+    double resultD = operation->MultiplyNumbers(2.5, 3.0);
+    double resultE = operation->DivideNumbers(32, 4);
 
     std::cout << "ResultA: " << resultA << std::endl;
-    // std::cout << "resultB: " << resultB << std::endl;
-    // std::cout << "ResultC: " << resultC << std::endl;
-    // std::cout << "resultD: " << resultD << std::endl;
-    // std::cout << "ResultE: " << resultE << std::endl;
+    std::cout << "resultB: " << resultB << std::endl;
+    std::cout << "ResultC: " << resultC << std::endl;
+    std::cout << "resultD: " << resultD << std::endl;
+    std::cout << "ResultE: " << resultE << std::endl;
 
     //// Consuming dynamic library: Using ObserverApi classes.
 
