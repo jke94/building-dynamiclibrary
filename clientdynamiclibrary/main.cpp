@@ -44,10 +44,6 @@ int main()
 #endif
 
     OPERATION create_operation = dynamic_library_manager.create_opearation();
-    // ADD_DOUBLE_NUMBERS add_double_numbers = dynamic_library_manager.get_add_double_numbers_function();
-    // SUBTRACT_INT_NUMBERS subtract_int_numbers = dynamic_library_manager.get_subtract_int_numbers_function();
-    // MULTIPLY_DOUBLE_NUMBERS multiply_double_numbers = dynamic_library_manager.get_multiply_double_numbers_function();
-    // DIVIDE_INT_NUMBERS divide_int_numbers = dynamic_library_manager.get_divide_int_numbers_function();
 
     if (create_operation == NULL)
     {
@@ -55,34 +51,6 @@ int main()
 
         return -1;
     }
-
-    // if (add_double_numbers == NULL)
-    // {
-    //     std::cout << "Impossible load function 'AddDoubleNumbers' in library 'dynamiclibrary.dll'" << std::endl;
-
-    //     return -1;
-    // }
-
-    // if (subtract_int_numbers == NULL)
-    // {
-    //     std::cout << "Impossible load function 'SubtractIntNumbers' in library 'dynamiclibrary.dll'" << std::endl;
-
-    //     return -1;
-    // }
-
-    // if (multiply_double_numbers == NULL)
-    // {
-    //     std::cout << "Impossible load function 'MultiplyDoubleNumbers' in library 'dynamiclibrary.dll'" << std::endl;
-
-    //     return -1;
-    // }
-
-    // if (divide_int_numbers == NULL)
-    // {
-    //     std::cout << "Impossible load function 'DivideIntNumbers' in library 'dynamiclibrary.dll'" << std::endl;
-
-    //     return -1;
-    // }
 
     IOperation* operation = create_operation();
 
