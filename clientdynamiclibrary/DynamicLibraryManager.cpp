@@ -9,7 +9,6 @@ DynamicLibraryManager::DynamicLibraryManager(const char *filename)
 
 void* DynamicLibraryManager::load_library()
 {
-
     if (_dynamic_library_name == nullptr)
     {
         return NULL;

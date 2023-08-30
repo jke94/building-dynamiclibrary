@@ -19,6 +19,8 @@ int main()
     DynamicLibraryManager dynamic_library_manager("libdynamiclibrary.so");
     void* dll_handle = dynamic_library_manager.load_library();
 
+    std::cout << "[INFO] dll_handle: " << dll_handle << std::endl; 
+
     if (dll_handle == NULL)
     {
         std::cout << "Impossible load library 'libdynamiclibrary.so'" << std::endl;
