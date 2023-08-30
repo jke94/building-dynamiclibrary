@@ -18,7 +18,7 @@ void* DynamicLibraryManager::load_library()
 
     std::cout << "TRACE B" << std::endl;
 
-    if (!_handle_dll)
+    if (_handle_dll == nullptr)
     {
         return _handle_dll;
     }
@@ -29,7 +29,7 @@ void* DynamicLibraryManager::load_library()
 
     std::cout << "TRACE D" << std::endl;
 
-    if (!_handle_dll)
+    if (_handle_dll == nullptr)
     {
         std::cout << "Could not open the library '"<< _handle_dll <<"'" << std::endl;
 
