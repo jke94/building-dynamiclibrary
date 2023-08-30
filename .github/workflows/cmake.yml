@@ -13,6 +13,9 @@ jobs:
             - name: CMake version
               run: cmake --version
 
+            - name: Make version
+              run: make --version
+
             - name: Create build directory
               run: mkdir build
 

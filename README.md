@@ -22,8 +22,16 @@ or running with Visual Studio 2022.
 
 ## Docker compose
 
+- Linux:
+
 ```
 sudo docker compose -f ./docker-compose.yml -p building-dynamic-lib up --build
+```
+
+- Windows:
+
+```
+docker-compose -f ./docker-compose.yml -p building-dynamic-lib up --build
 ```
 
 ## Useful information.
