@@ -15,12 +15,16 @@ jobs:
 
             - name: Create build directory
               run: mkdir build
-              working-directory: ./dynamiclibrary
+              working-directory: ./build
 
             - name: CMake
               run: cmake ..
-              working-directory: ./dynamiclibrary/build
+              working-directory: ./build
 
             - name: Run Makefile
               run: make
-              working-directory: ./dynamiclibrary/build
+              working-directory: ./build
+
+            - name: Run program
+              run: ./clientdynamiclibrary
+              working-directory: ./build
