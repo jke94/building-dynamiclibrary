@@ -381,3 +381,6 @@ _deps
 dynamiclibrary/build/
 *.so
 build/ 
+
+# Visual Studio Code 
+.vscode/
