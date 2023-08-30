@@ -15,7 +15,7 @@ RUN make
 
 FROM ubuntu:latest
 RUN mkdir output
-COPY --from=builder /build/lidynamiclibrary.so /usr/lib
+COPY --from=builder /build/libdynamiclibrary.so /usr/lib
 COPY --from=builder /build/clientdynamiclibrary /output
 WORKDIR /output
 CMD ["./clientdynamiclibrary"]
