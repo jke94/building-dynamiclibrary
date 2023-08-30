@@ -7,7 +7,7 @@ namespace ObserverApi
     class Observer : public IObserver
     {
     public:
-        Observer(int id_number, Subject& subject);
+        Observer(int id_number, ISubject& subject);
 
         virtual ~Observer();
 
@@ -19,7 +19,7 @@ namespace ObserverApi
 
     private:
         std::string message_from_subject_;
-        Subject& subject_;
+        ISubject& subject_;
         int _id_number = 0;
     };
 }

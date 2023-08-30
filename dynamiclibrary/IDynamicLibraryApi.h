@@ -22,6 +22,7 @@ class IObserver
 
 		virtual ~IObserver() {};
 		virtual void Update(const std::string& message_from_subject) = 0;
+		virtual void RemoveMeFromTheList() = 0;
 };
 
 class ISubject
@@ -32,4 +33,5 @@ class ISubject
 		virtual void Attach(IObserver* observer) = 0;
 		virtual void Detach(IObserver* observer) = 0;
 		virtual void Notify() = 0;
+		virtual void CreateMessage(std::string message) = 0;
 };
