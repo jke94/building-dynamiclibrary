@@ -9,23 +9,25 @@ DynamicLibraryManager::DynamicLibraryManager(const char *filename)
 
 void* DynamicLibraryManager::load_library()
 {
-    std::cout << "TRACE A" std::endl;
+    std::cout << "TRACE A" << std::endl;
 
     if (_dynamic_library_name == nullptr)
     {
         return NULL;
     }
 
-    std::cout << "TRACE B" std::endl;
+    std::cout << "TRACE B" << std::endl;
 
     if (!_handle_dll)
     {
         return _handle_dll;
     }
 
-    std::cout << "TRACE C" std::endl;
+    std::cout << "TRACE C" << std::endl;
 
     _handle_dll = dlopen(_dynamic_library_name, RTLD_LAZY);
+
+    std::cout << "TRACE D" << std::endl;
 
     if (!_handle_dll)
     {
@@ -33,6 +35,8 @@ void* DynamicLibraryManager::load_library()
 
         return nullptr;
     }
+
+    std::cout << "TRACE E" << std::endl;
 
     std::cout << "Loaded library '" << _dynamic_library_name << "'" << std::endl;
 
