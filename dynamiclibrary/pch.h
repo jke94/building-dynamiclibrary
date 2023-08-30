@@ -16,7 +16,6 @@
 // add headers that you want to pre-compile here
 #include "framework.h"
 #include "IDynamicLibraryApi.h"
-//#include "ObserverApi.h"
 #include "Subject.h"
 #include "Observer.h"
 #include "Operation.h"
