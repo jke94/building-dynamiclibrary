@@ -1,5 +1,7 @@
 #include "pch.h"
 
+#include <iostream>
+
 namespace ObserverApi
 {
     Observer::Observer(int id_number, Subject& subject) : subject_(subject)

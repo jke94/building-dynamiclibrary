@@ -153,9 +153,10 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="IDynamicLibraryApi.h" />
-    <ClInclude Include="ObserverApi.h" />
+    <ClInclude Include="Observer.h" />
     <ClInclude Include="Operation.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Subject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
