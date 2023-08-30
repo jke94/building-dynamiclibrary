@@ -15,7 +15,6 @@ jobs:
 
             - name: Create build directory
               run: mkdir build
-              working-directory: ./build
 
             - name: CMake
               run: cmake ..
