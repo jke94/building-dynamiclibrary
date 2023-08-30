@@ -68,44 +68,44 @@ int main()
     std::cout << "resultD: " << resultD << std::endl;
     std::cout << "ResultE: " << resultE << std::endl;
 
-    //// Consuming dynamic library: Using ObserverApi classes.
+    // Consuming dynamic library: Using ObserverApi classes.
 
-    // SUBJECT create_subject = dynamic_library_manager.get_create_subject_function();
-    // OBSERVER create_observer = dynamic_library_manager.get_create_observer_function();
-    // CREATE_MESSAGE create_message = dynamic_library_manager.get_create_message_function();
-    // REMOVEME_FROM_THE_LIST removeme_from_the_list = dynamic_library_manager.get_removeme_from_the_list_function();
+     SUBJECT create_subject = dynamic_library_manager.get_create_subject_function();
+     OBSERVER create_observer = dynamic_library_manager.get_create_observer_function();
+     CREATE_MESSAGE create_message = dynamic_library_manager.get_create_message_function();
+     REMOVEME_FROM_THE_LIST removeme_from_the_list = dynamic_library_manager.get_removeme_from_the_list_function();
 
-    // ObserverApi::Subject* subject = create_subject();
+     ISubject* subject = create_subject();
    
-    // ObserverApi::Observer* observer1 = create_observer(1, *subject);
-    // ObserverApi::Observer* observer2 = create_observer(2, *subject);
-    // ObserverApi::Observer* observer3 = create_observer(3, *subject);
-    // ObserverApi::Observer* observer4 = nullptr;
-    // ObserverApi::Observer* observer5 = nullptr;
+     IObserver* observer1 = create_observer(1, *subject);
+     IObserver* observer2 = create_observer(2, *subject);
+     IObserver* observer3 = create_observer(3, *subject);
+     IObserver* observer4 = nullptr;
+     IObserver* observer5 = nullptr;
 
-    // create_message(*subject, "Hello World! :D");
-    // create_message(*subject, "Hello World! :D again!!");
+     create_message(*subject, "Hello World! :D");
+     create_message(*subject, "Hello World! :D again!!");
 
-    // removeme_from_the_list(*observer3);
+     removeme_from_the_list(*observer3);
 
-    // create_message(*subject, "The weather is hot today! :p");
-    // observer4 = create_observer(4, *subject);
+     create_message(*subject, "The weather is hot today! :p");
+     observer4 = create_observer(4, *subject);
     
-    // removeme_from_the_list(*observer2);
-    // observer5 = create_observer(5, *subject);
+     removeme_from_the_list(*observer2);
+     observer5 = create_observer(5, *subject);
 
-    // create_message(*subject, "My new car is great! ;)");
-    // removeme_from_the_list(*observer5);
+     create_message(*subject, "My new car is great! ;)");
+     removeme_from_the_list(*observer5);
 
-    // removeme_from_the_list(*observer4);
-    // removeme_from_the_list(*observer1);
+     removeme_from_the_list(*observer4);
+     removeme_from_the_list(*observer1);
 
-    // delete observer5;
-    // delete observer4;
-    // delete observer3;
-    // delete observer2;
-    // delete observer1;
-    // delete subject;
+     delete observer5;
+     delete observer4;
+     delete observer3;
+     delete observer2;
+     delete observer1;
+     delete subject;
 
     return 0;
 }

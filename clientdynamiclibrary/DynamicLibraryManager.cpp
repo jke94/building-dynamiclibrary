@@ -134,42 +134,83 @@ OPERATION DynamicLibraryManager::create_opearation()
     return operation;
 }
 
-// SUBJECT DynamicLibraryManager::get_create_subject_function()
-// {
-//     if (_handle_dll == NULL)
-//     {
-//         return NULL;
-//     }
+ SUBJECT DynamicLibraryManager::get_create_subject_function()
+ {
+     if (_handle_dll == NULL)
+     {
+         throw std::logic_error("'_handle_dll' is empty. Call 'load_library' function and check output.");
+     }
 
-//     return (SUBJECT)GetProcAddress(_handle_dll, "Create_subject");
-// }
+#ifdef __linux__ 
 
-// OBSERVER DynamicLibraryManager::get_create_observer_function()
-// {
-//     if (_handle_dll == NULL)
-//     {
-//         return NULL;
-//     }
+     SUBJECT subject = reinterpret_cast<SUBJECT>(dlsym(_handle_dll, "Create_subject"));
 
-//     return (OBSERVER)GetProcAddress(_handle_dll, "Create_observer");
-// }
+#elif _WIN32
 
-// CREATE_MESSAGE DynamicLibraryManager::get_create_message_function()
-// {
-//     if (_handle_dll == NULL)
-//     {
-//         return NULL;
-//     }
+     SUBJECT subject = reinterpret_cast<SUBJECT>(GetProcAddress(_handle_dll, "Create_subject"));
 
-//     return (CREATE_MESSAGE)GetProcAddress(_handle_dll, "Create_message");
-// }
+#endif
 
-// REMOVEME_FROM_THE_LIST DynamicLibraryManager::get_removeme_from_the_list_function()
-// {
-//     if (_handle_dll == NULL)
-//     {
-//         return NULL;
-//     }
+     return subject;
+ }
 
-//     return (REMOVEME_FROM_THE_LIST)GetProcAddress(_handle_dll, "Removeme_from_the_list");
-// }
+ OBSERVER DynamicLibraryManager::get_create_observer_function()
+ {
+     if (_handle_dll == NULL)
+     {
+         throw std::logic_error("'_handle_dll' is empty. Call 'load_library' function and check output.");
+     }
+
+#ifdef __linux__ 
+
+     OBSERVER observer = reinterpret_cast<OBSERVER>(dlsym(_handle_dll, "Create_observer"));
+
+#elif _WIN32
+
+     OBSERVER observer = reinterpret_cast<OBSERVER>(GetProcAddress(_handle_dll, "Create_observer"));
+
+#endif
+
+     return observer;
+ }
+
+ CREATE_MESSAGE DynamicLibraryManager::get_create_message_function()
+ {
+     if (_handle_dll == NULL)
+     {
+         throw std::logic_error("'_handle_dll' is empty. Call 'load_library' function and check output.");
+     }
+
+#ifdef __linux__ 
+
+     CREATE_MESSAGE create_message = reinterpret_cast<CREATE_MESSAGE>(dlsym(_handle_dll, "Create_message"));
+
+#elif _WIN32
+
+     CREATE_MESSAGE create_message = reinterpret_cast<CREATE_MESSAGE>(GetProcAddress(_handle_dll, "Create_message"));
+
+#endif
+
+     return create_message;
+ }
+
+ REMOVEME_FROM_THE_LIST DynamicLibraryManager::get_removeme_from_the_list_function()
+ {
+
+     if (_handle_dll == NULL)
+     {
+         throw std::logic_error("'_handle_dll' is empty. Call 'load_library' function and check output.");
+     }
+
+#ifdef __linux__ 
+
+     REMOVEME_FROM_THE_LIST remove_from_the_list = reinterpret_cast<REMOVEME_FROM_THE_LIST>(dlsym(_handle_dll, "Removeme_from_the_list"));
+
+#elif _WIN32
+
+     REMOVEME_FROM_THE_LIST remove_from_the_list = reinterpret_cast<REMOVEME_FROM_THE_LIST>(GetProcAddress(_handle_dll, "Removeme_from_the_list"));
+
+#endif
+
+     return remove_from_the_list;
+ }

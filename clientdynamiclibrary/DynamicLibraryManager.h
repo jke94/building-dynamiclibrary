@@ -48,10 +48,10 @@ class DynamicLibraryManager
 
         OPERATION create_opearation();
 
-        // SUBJECT get_create_subject_function();
-        // OBSERVER get_create_observer_function();
-        // CREATE_MESSAGE get_create_message_function();
-        // REMOVEME_FROM_THE_LIST get_removeme_from_the_list_function();
+         SUBJECT get_create_subject_function();
+         OBSERVER get_create_observer_function();
+         CREATE_MESSAGE get_create_message_function();
+         REMOVEME_FROM_THE_LIST get_removeme_from_the_list_function();
 
     private:
 };
