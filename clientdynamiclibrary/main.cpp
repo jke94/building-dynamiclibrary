@@ -14,10 +14,16 @@
 int main()
 {
 
+    IDynamicLibraryManager* dynamic_library_manager;
+
 #ifdef __linux__ 
 
-    DynamicLibraryManager dynamic_library_manager("libdynamiclibrary.so");
-    void* dll_handle = dynamic_library_manager.load_library();
+    const char *libName = "libdynamiclibrary.so";
+    dynamic_library_manager = new DynamicLibraryManager(libName);
+
+    std::cout << dynamic_library_manager->get_dynamic_library_name() << std::endl;
+
+    void* dll_handle = dynamic_library_manager->load_library();
 
     std::cout << "[INFO] dll_handle: " << dll_handle << std::endl; 
 
@@ -30,9 +36,9 @@ int main()
 
 #elif _WIN32
 
-    DynamicLibraryManager dynamic_library_manager(L"dynamiclibrary.dll");
+    dynamic_library_manager = new DynamicLibraryManager(L"dynamiclibrary.dll");
 
-    HINSTANCE dll_handle = dynamic_library_manager.load_library();
+    HINSTANCE dll_handle = dynamic_library_manager->load_library();
 
     if (dll_handle == NULL)
     {
@@ -45,7 +51,7 @@ int main()
 
 #endif
 
-    OPERATION create_operation = dynamic_library_manager.create_opearation();
+    OPERATION create_operation = dynamic_library_manager->create_opearation();
 
     if (create_operation == NULL)
     {
@@ -70,10 +76,10 @@ int main()
 
     // Consuming dynamic library: Using ObserverApi classes.
 
-     SUBJECT create_subject = dynamic_library_manager.get_create_subject_function();
-     OBSERVER create_observer = dynamic_library_manager.get_create_observer_function();
-     CREATE_MESSAGE create_message = dynamic_library_manager.get_create_message_function();
-     REMOVEME_FROM_THE_LIST removeme_from_the_list = dynamic_library_manager.get_removeme_from_the_list_function();
+     SUBJECT create_subject = dynamic_library_manager->get_create_subject_function();
+     OBSERVER create_observer = dynamic_library_manager->get_create_observer_function();
+     CREATE_MESSAGE create_message = dynamic_library_manager->get_create_message_function();
+     REMOVEME_FROM_THE_LIST removeme_from_the_list = dynamic_library_manager->get_removeme_from_the_list_function();
 
      ISubject* subject = create_subject();
    
@@ -100,12 +106,15 @@ int main()
      removeme_from_the_list(*observer4);
      removeme_from_the_list(*observer1);
 
+
      delete observer5;
      delete observer4;
      delete observer3;
      delete observer2;
      delete observer1;
      delete subject;
+
+     delete dynamic_library_manager;
 
     return 0;
 }

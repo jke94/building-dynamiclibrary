@@ -7,6 +7,19 @@ DynamicLibraryManager::DynamicLibraryManager(const char *filename)
     _dynamic_library_name = filename;
 }
 
+DynamicLibraryManager::~DynamicLibraryManager()
+{
+    if (_handle_dll)
+    {
+        int fFreeDLL = dlclose(_handle_dll);
+
+        std::wcout << "Free so library '" << _dynamic_library_name <<
+            "' operation result : " << fFreeDLL << std::endl;
+
+        _handle_dll = NULL;
+    }
+}
+
 void* DynamicLibraryManager::load_library()
 {
     if (_dynamic_library_name == nullptr)
@@ -14,7 +27,7 @@ void* DynamicLibraryManager::load_library()
         return NULL;
     }
 
-    if (!_handle_dll)
+    if (_handle_dll != NULL)
     {
         return _handle_dll;
     }
@@ -31,6 +44,21 @@ void* DynamicLibraryManager::load_library()
     std::cout << "Loaded library '" << _dynamic_library_name << "'" << std::endl;
 
     return _handle_dll;
+}
+
+void* DynamicLibraryManager::get_dll_handle()
+{
+    return _handle_dll;
+}
+
+const char* DynamicLibraryManager::get_dynamic_library_name()
+{
+    if (_dynamic_library_name == NULL)
+    {
+        return NULL;
+    }
+
+    return _dynamic_library_name;
 }
 
 #elif _WIN32
@@ -81,24 +109,8 @@ LPCWSTR DynamicLibraryManager::get_dynamic_library_name()
     return _dynamic_library_name;
 }
 
-#endif
-
 DynamicLibraryManager::~DynamicLibraryManager()
 {
-
-#ifdef __linux__ 
-
-    if (_handle_dll)
-    {
-        int fFreeDLL = dlclose(_handle_dll);
-
-        std::wcout << "Free so library '" << _dynamic_library_name <<
-            "' operation result : " << fFreeDLL << std::endl;
-
-        _handle_dll = NULL;
-}
-
-#elif _WIN32
 
     if (_handle_dll != NULL)
     {
@@ -109,10 +121,9 @@ DynamicLibraryManager::~DynamicLibraryManager()
 
         _handle_dll = NULL;
     }
+}
 
 #endif
-
-}
 
 OPERATION DynamicLibraryManager::create_opearation()
 {

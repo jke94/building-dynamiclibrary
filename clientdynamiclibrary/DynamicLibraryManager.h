@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "LibrayTypeDefinitions.h"
+#include "IDynamicLibraryManager.h"
 
 #ifdef _WIN32
 
@@ -15,7 +16,7 @@
     // Mac OS
 #endif
 
-class DynamicLibraryManager
+class DynamicLibraryManager : public IDynamicLibraryManager
 {
 
 #ifdef __linux__ 
@@ -26,8 +27,11 @@ class DynamicLibraryManager
         const char* _dynamic_library_name;
 
     public:
+
         DynamicLibraryManager(const char *filename);
         void* load_library();
+        void* get_dll_handle();
+	    const char* get_dynamic_library_name();
          
 #elif _WIN32
 
@@ -48,10 +52,8 @@ class DynamicLibraryManager
 
         OPERATION create_opearation();
 
-         SUBJECT get_create_subject_function();
-         OBSERVER get_create_observer_function();
-         CREATE_MESSAGE get_create_message_function();
-         REMOVEME_FROM_THE_LIST get_removeme_from_the_list_function();
-
-    private:
+        SUBJECT get_create_subject_function();
+        OBSERVER get_create_observer_function();
+        CREATE_MESSAGE get_create_message_function();
+        REMOVEME_FROM_THE_LIST get_removeme_from_the_list_function();
 };

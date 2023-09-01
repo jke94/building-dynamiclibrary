@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DynamicLibraryManager.h" />
+    <ClInclude Include="IDynamicLibraryManager.h" />
     <ClInclude Include="LibrayTypeDefinitions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -29,5 +29,8 @@
     <ClInclude Include="LibrayTypeDefinitions.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
+    <ClInclude Include="IDynamicLibraryManager.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
