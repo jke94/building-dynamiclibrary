@@ -18,8 +18,8 @@ int main()
 
 #ifdef __linux__ 
 
-    const char *libName = "libdynamiclibrary.so";
-    dynamic_library_manager = new DynamicLibraryManager(libName);
+    const char *dynamicLibName = "libdynamiclibrary.so";
+    dynamic_library_manager = new DynamicLibraryManager(dynamicLibName);
 
     std::cout << dynamic_library_manager->get_dynamic_library_name() << std::endl;
 
@@ -36,7 +36,8 @@ int main()
 
 #elif _WIN32
 
-    dynamic_library_manager = new DynamicLibraryManager(L"dynamiclibrary.dll");
+    LPCWSTR dynamicLibName = L"dynamiclibrary.dll";
+    dynamic_library_manager = new DynamicLibraryManager(dynamicLibName);
 
     HINSTANCE dll_handle = dynamic_library_manager->load_library();
 
@@ -50,6 +51,10 @@ int main()
 #else
 
 #endif
+
+    //  ******************************************************************************
+    //  EXAMPLE A: Calling to operation class that allows do basic maths operations.
+    //  ******************************************************************************
 
     OPERATION create_operation = dynamic_library_manager->create_opearation();
 
@@ -74,7 +79,11 @@ int main()
     std::cout << "resultD: " << resultD << std::endl;
     std::cout << "ResultE: " << resultE << std::endl;
 
-    // Consuming dynamic library: Using ObserverApi classes.
+    delete operation;
+
+    //  ******************************************************************************
+    //  EXAMPLE B: Consuming dynamic library that expose logic with observable pattern.
+    //  ******************************************************************************
 
      SUBJECT create_subject = dynamic_library_manager->get_create_subject_function();
      OBSERVER create_observer = dynamic_library_manager->get_create_observer_function();
