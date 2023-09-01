@@ -1,13 +1,17 @@
-#include <iostream>
 
 #ifdef __linux__ 
+    
     #include <dlfcn.h>
+
 #elif _WIN32
+
     #include <windows.h>
+
 #else
 
 #endif
 
+#include <iostream>
 #include "LibrayTypeDefinitions.h"
 #include "DynamicLibraryManager.h"
 
