@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>dynamiclibrary</id>
-    <version>2023.08.21</version>
+    <version>2023.08.30</version>
     <title>dynamiclibrary</title>
     <authors>jke94</authors>
     <owners>jke94</owners>
@@ -39,9 +39,8 @@
     <file src="Win32\Debug\dynamiclibrary.lib"        target="build\native\libs\x86\Debug"/>
     <file src="Win32\Debug\dynamiclibrary.pdb"        target="build\native\libs\x86\Debug"/>
 
-    <!-- Header files -->
-    <file src="dynamiclibrary\OperationsApi.h"        target="build\native\interface" />
-    <file src="dynamiclibrary\ObserverApi.h"          target="build\native\interface" />
+    <!-- API: Header files -->
+    <file src="dynamiclibrary\IDynamicLibraryApi.h"   target="build\native\interface" />
     
     <!-- Readme file -->
     <file src="dynamiclibrary\README.md"              target="doc" />

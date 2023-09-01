@@ -1,5 +1,7 @@
 #include "pch.h"
 
+#include <iostream>
+
 namespace ObserverApi
 {
     Subject::~Subject()

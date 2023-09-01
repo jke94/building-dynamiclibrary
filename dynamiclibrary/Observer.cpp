@@ -1,8 +1,10 @@
 #include "pch.h"
 
+#include <iostream>
+
 namespace ObserverApi
 {
-    Observer::Observer(int id_number, Subject& subject) : subject_(subject)
+    Observer::Observer(int id_number, ISubject& subject) : subject_(subject)
     {
         this->subject_.Attach(this);
         this->_id_number = id_number;

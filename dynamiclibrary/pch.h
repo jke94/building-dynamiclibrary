@@ -7,9 +7,17 @@
 #ifndef PCH_H
 #define PCH_H
 
+#ifdef _WIN32
+    #define DYNAMICLIBRARY_API __declspec(dllexport)
+#else
+    #define DYNAMICLIBRARY_API 
+#endif
+
 // add headers that you want to pre-compile here
 #include "framework.h"
-#include "OperationsApi.h"
-#include "ObserverApi.h"
+#include "IDynamicLibraryApi.h"
+#include "Subject.h"
+#include "Observer.h"
+#include "Operation.h"
 
 #endif //PCH_H

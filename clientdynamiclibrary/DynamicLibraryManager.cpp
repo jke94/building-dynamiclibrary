@@ -1,22 +1,72 @@
 #include "DynamicLibraryManager.h"
 
-DynamicLibraryManager::DynamicLibraryManager(
-    LPCWSTR dynamic_library_name)
+#ifdef __linux__
+
+DynamicLibraryManager::DynamicLibraryManager(const char *filename)
 {
-	_dynamic_library_name = dynamic_library_name;
+    _dynamic_library_name = filename;
 }
 
 DynamicLibraryManager::~DynamicLibraryManager()
 {
-    if (_handle_dll != NULL)
+    if (_handle_dll)
     {
-        BOOL fFreeDLL = FreeLibrary(_handle_dll);
+        int fFreeDLL = dlclose(_handle_dll);
 
-        std::wcout << "Free dll library '" << _dynamic_library_name <<
+        std::wcout << "Free so library '" << _dynamic_library_name <<
             "' operation result : " << fFreeDLL << std::endl;
 
         _handle_dll = NULL;
     }
+}
+
+void* DynamicLibraryManager::load_library()
+{
+    if (_dynamic_library_name == nullptr)
+    {
+        return NULL;
+    }
+
+    if (_handle_dll != NULL)
+    {
+        return _handle_dll;
+    }
+
+    _handle_dll = dlopen(_dynamic_library_name, RTLD_LAZY);
+
+    if (!_handle_dll)
+    {
+        std::cout << "Could not open the library '"<< _handle_dll <<"'" << std::endl;
+
+        return nullptr;
+    }
+
+    std::cout << "Loaded library '" << _dynamic_library_name << "'" << std::endl;
+
+    return _handle_dll;
+}
+
+void* DynamicLibraryManager::get_dll_handle()
+{
+    return _handle_dll;
+}
+
+const char* DynamicLibraryManager::get_dynamic_library_name()
+{
+    if (_dynamic_library_name == NULL)
+    {
+        return NULL;
+    }
+
+    return _dynamic_library_name;
+}
+
+#elif _WIN32
+
+DynamicLibraryManager::DynamicLibraryManager(
+    LPCWSTR dynamic_library_name)
+{
+	_dynamic_library_name = dynamic_library_name;
 }
 
 HINSTANCE DynamicLibraryManager::load_library()
@@ -59,122 +109,119 @@ LPCWSTR DynamicLibraryManager::get_dynamic_library_name()
     return _dynamic_library_name;
 }
 
-ADD_INT_NUMBERS DynamicLibraryManager::get_add_int_numbers_function()
+DynamicLibraryManager::~DynamicLibraryManager()
+{
+
+    if (_handle_dll != NULL)
+    {
+        BOOL fFreeDLL = FreeLibrary(_handle_dll);
+
+        std::wcout << "Free dll library '" << _dynamic_library_name <<
+            "' operation result : " << fFreeDLL << std::endl;
+
+        _handle_dll = NULL;
+    }
+}
+
+#endif
+
+OPERATION DynamicLibraryManager::create_opearation()
 {
     if (_handle_dll == NULL)
     {
-        return NULL;
+        throw std::logic_error("'_handle_dll' is empty. Call 'load_library' function and check output.");
     }
 
-    return (ADD_INT_NUMBERS)GetProcAddress(_handle_dll, "AddIntNumbers");
+#ifdef __linux__ 
+
+    OPERATION operation = reinterpret_cast<OPERATION>(dlsym(_handle_dll, "CreateOperation"));
+
+#elif _WIN32
+
+    OPERATION operation = reinterpret_cast<OPERATION>(GetProcAddress(_handle_dll, "CreateOperation"));
+
+#endif
+
+    return operation;
 }
 
-ADD_DOUBLE_NUMBERS DynamicLibraryManager::get_add_double_numbers_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+ SUBJECT DynamicLibraryManager::get_create_subject_function()
+ {
+     if (_handle_dll == NULL)
+     {
+         throw std::logic_error("'_handle_dll' is empty. Call 'load_library' function and check output.");
+     }
 
-    return (ADD_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "AddDoubleNumbers");
-}
+#ifdef __linux__ 
 
-SUBTRACT_INT_NUMBERS DynamicLibraryManager::get_subtract_int_numbers_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+     SUBJECT subject = reinterpret_cast<SUBJECT>(dlsym(_handle_dll, "Create_subject"));
 
-    return (SUBTRACT_INT_NUMBERS)GetProcAddress(_handle_dll, "SubtractIntNumbers");
-}
+#elif _WIN32
 
-SUBTRACT_DOUBLE_NUMBERS DynamicLibraryManager::get_subtract_double_numbers_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+     SUBJECT subject = reinterpret_cast<SUBJECT>(GetProcAddress(_handle_dll, "Create_subject"));
 
-    return (SUBTRACT_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "SubtractDoubleNumbers");
-}
+#endif
 
-MULTIPLY_INT_NUMBERS DynamicLibraryManager::get_multiply_int_numbers_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+     return subject;
+ }
 
-    return (MULTIPLY_INT_NUMBERS)GetProcAddress(_handle_dll, "MultiplyIntNumbers");
-}
+ OBSERVER DynamicLibraryManager::get_create_observer_function()
+ {
+     if (_handle_dll == NULL)
+     {
+         throw std::logic_error("'_handle_dll' is empty. Call 'load_library' function and check output.");
+     }
 
-MULTIPLY_DOUBLE_NUMBERS DynamicLibraryManager::get_multiply_double_numbers_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+#ifdef __linux__ 
 
-    return (MULTIPLY_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "MultiplyDoubleNumbers");
-}
+     OBSERVER observer = reinterpret_cast<OBSERVER>(dlsym(_handle_dll, "Create_observer"));
 
-DIVIDE_INT_NUMBERS DynamicLibraryManager::get_divide_int_numbers_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+#elif _WIN32
 
-    return (DIVIDE_INT_NUMBERS)GetProcAddress(_handle_dll, "DivideIntNumbers");
-}
+     OBSERVER observer = reinterpret_cast<OBSERVER>(GetProcAddress(_handle_dll, "Create_observer"));
 
-DIVIDE_DOUBLE_NUMBERS DynamicLibraryManager::get_divide_double_numbers_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+#endif
 
-    return (DIVIDE_DOUBLE_NUMBERS)GetProcAddress(_handle_dll, "DivideDoubleNumbers");
-}
+     return observer;
+ }
 
-SUBJECT DynamicLibraryManager::get_create_subject_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+ CREATE_MESSAGE DynamicLibraryManager::get_create_message_function()
+ {
+     if (_handle_dll == NULL)
+     {
+         throw std::logic_error("'_handle_dll' is empty. Call 'load_library' function and check output.");
+     }
 
-    return (SUBJECT)GetProcAddress(_handle_dll, "Create_subject");
-}
+#ifdef __linux__ 
 
-OBSERVER DynamicLibraryManager::get_create_observer_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+     CREATE_MESSAGE create_message = reinterpret_cast<CREATE_MESSAGE>(dlsym(_handle_dll, "Create_message"));
 
-    return (OBSERVER)GetProcAddress(_handle_dll, "Create_observer");
-}
+#elif _WIN32
 
-CREATE_MESSAGE DynamicLibraryManager::get_create_message_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+     CREATE_MESSAGE create_message = reinterpret_cast<CREATE_MESSAGE>(GetProcAddress(_handle_dll, "Create_message"));
 
-    return (CREATE_MESSAGE)GetProcAddress(_handle_dll, "Create_message");
-}
+#endif
 
-REMOVEME_FROM_THE_LIST DynamicLibraryManager::get_removeme_from_the_list_function()
-{
-    if (_handle_dll == NULL)
-    {
-        return NULL;
-    }
+     return create_message;
+ }
 
-    return (REMOVEME_FROM_THE_LIST)GetProcAddress(_handle_dll, "Removeme_from_the_list");
-}
+ REMOVEME_FROM_THE_LIST DynamicLibraryManager::get_removeme_from_the_list_function()
+ {
+
+     if (_handle_dll == NULL)
+     {
+         throw std::logic_error("'_handle_dll' is empty. Call 'load_library' function and check output.");
+     }
+
+#ifdef __linux__ 
+
+     REMOVEME_FROM_THE_LIST remove_from_the_list = reinterpret_cast<REMOVEME_FROM_THE_LIST>(dlsym(_handle_dll, "Removeme_from_the_list"));
+
+#elif _WIN32
+
+     REMOVEME_FROM_THE_LIST remove_from_the_list = reinterpret_cast<REMOVEME_FROM_THE_LIST>(GetProcAddress(_handle_dll, "Removeme_from_the_list"));
+
+#endif
+
+     return remove_from_the_list;
+ }
