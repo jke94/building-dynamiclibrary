@@ -13,7 +13,7 @@ DynamicLibraryManager::~DynamicLibraryManager()
     {
         int fFreeDLL = dlclose(_handle_dll);
 
-        std::wcout << "Free so library '" << _dynamic_library_name <<
+        std::wcout << "[DynamicLibraryManager] Free so library '" << _dynamic_library_name <<
             "' operation result : " << fFreeDLL << std::endl;
 
         _handle_dll = NULL;
@@ -36,12 +36,12 @@ void* DynamicLibraryManager::load_library()
 
     if (!_handle_dll)
     {
-        std::cout << "Could not open the library '"<< _handle_dll <<"'" << std::endl;
+        std::cout << "[DynamicLibraryManager] Could not open the library '"<< _handle_dll <<"'" << std::endl;
 
         return nullptr;
     }
 
-    std::cout << "Loaded library '" << _dynamic_library_name << "'" << std::endl;
+    std::cout << "[DynamicLibraryManager] Loaded library '" << _dynamic_library_name << "'" << std::endl;
 
     return _handle_dll;
 }
@@ -85,11 +85,11 @@ HINSTANCE DynamicLibraryManager::load_library()
 
     if (_handle_dll == NULL)
     {
-        std::wcout << "Impossible load library '"<< _dynamic_library_name << "'" << std::endl;
+        std::wcout << "[DYNAMIC_LIBRARY_MANAGER] Impossible load library '"<< _dynamic_library_name << "'" << std::endl;
 
         return NULL;
     }
-    std::wcout << "Loaded library '" << _dynamic_library_name << "'" << std::endl;
+    std::wcout << "[DYNAMIC_LIBRARY_MANAGER] Loaded library '" << _dynamic_library_name << "'" << std::endl;
 
 	return _handle_dll;
 }
@@ -116,7 +116,7 @@ DynamicLibraryManager::~DynamicLibraryManager()
     {
         BOOL fFreeDLL = FreeLibrary(_handle_dll);
 
-        std::wcout << "Free dll library '" << _dynamic_library_name <<
+        std::wcout << "[DYNAMIC_LIBRARY_MANAGER] Free dll library '" << _dynamic_library_name <<
             "' operation result : " << fFreeDLL << std::endl;
 
         _handle_dll = NULL;
@@ -129,7 +129,7 @@ OPERATION DynamicLibraryManager::create_opearation()
 {
     if (_handle_dll == NULL)
     {
-        throw std::logic_error("'_handle_dll' is empty. Call 'load_library' function and check output.");
+        throw std::logic_error("[DYNAMIC_LIBRARY_MANAGER] '_handle_dll' is empty. Call 'load_library' function and check output.");
     }
 
 #ifdef __linux__ 
@@ -149,7 +149,7 @@ OPERATION DynamicLibraryManager::create_opearation()
  {
      if (_handle_dll == NULL)
      {
-         throw std::logic_error("'_handle_dll' is empty. Call 'load_library' function and check output.");
+         throw std::logic_error("[DYNAMIC_LIBRARY_MANAGER] '_handle_dll' is empty. Call 'load_library' function and check output.");
      }
 
 #ifdef __linux__ 
@@ -169,7 +169,7 @@ OPERATION DynamicLibraryManager::create_opearation()
  {
      if (_handle_dll == NULL)
      {
-         throw std::logic_error("'_handle_dll' is empty. Call 'load_library' function and check output.");
+         throw std::logic_error("[DYNAMIC_LIBRARY_MANAGER] '_handle_dll' is empty. Call 'load_library' function and check output.");
      }
 
 #ifdef __linux__ 
@@ -189,7 +189,7 @@ OPERATION DynamicLibraryManager::create_opearation()
  {
      if (_handle_dll == NULL)
      {
-         throw std::logic_error("'_handle_dll' is empty. Call 'load_library' function and check output.");
+         throw std::logic_error("[DYNAMIC_LIBRARY_MANAGER] '_handle_dll' is empty. Call 'load_library' function and check output.");
      }
 
 #ifdef __linux__ 
@@ -210,7 +210,7 @@ OPERATION DynamicLibraryManager::create_opearation()
 
      if (_handle_dll == NULL)
      {
-         throw std::logic_error("'_handle_dll' is empty. Call 'load_library' function and check output.");
+         throw std::logic_error("[DYNAMIC_LIBRARY_MANAGER] '_handle_dll' is empty. Call 'load_library' function and check output.");
      }
 
 #ifdef __linux__ 
