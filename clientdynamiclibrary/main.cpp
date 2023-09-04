@@ -12,6 +12,7 @@
 #endif
 
 #include <iostream>
+#include <vector>
 #include "LibrayTypeDefinitions.h"
 #include "DynamicLibraryManager.h"
 
@@ -25,11 +26,11 @@ int main()
     const char *dynamicLibName = "libdynamiclibrary.so";
     dynamic_library_manager = new DynamicLibraryManager(dynamicLibName);
 
-    std::cout << dynamic_library_manager->get_dynamic_library_name() << std::endl;
+    std::cout << "[CLIENT][INFO] dll_handle: " << dynamic_library_manager->get_dynamic_library_name() << std::endl;
 
     void* dll_handle = dynamic_library_manager->load_library();
 
-    std::cout << "[INFO] dll_handle: " << dll_handle << std::endl; 
+    std::cout << "[CLIENT][INFO] dll_handle: " << dll_handle << std::endl; 
 
     if (dll_handle == NULL)
     {
@@ -44,6 +45,8 @@ int main()
     dynamic_library_manager = new DynamicLibraryManager(dynamicLibName);
 
     HINSTANCE dll_handle = dynamic_library_manager->load_library();
+
+    std::cout << "[CLIENT][INFO] dll_handle: " << dll_handle << std::endl;
 
     if (dll_handle == NULL)
     {
@@ -64,7 +67,7 @@ int main()
 
     if (create_operation == NULL)
     {
-        std::cout << "Impossible load function 'CreateOperation' in library 'dynamiclibrary.dll'" << std::endl;
+        std::cout << "[CLIENT] Impossible load function 'CreateOperation' in library 'dynamiclibrary.dll'" << std::endl;
 
         return -1;
     }
@@ -77,11 +80,11 @@ int main()
     double resultD = operation->MultiplyNumbers(2.5, 3.0);
     double resultE = operation->DivideNumbers(32, 4);
 
-    std::cout << "ResultA: " << resultA << std::endl;
-    std::cout << "resultB: " << resultB << std::endl;
-    std::cout << "ResultC: " << resultC << std::endl;
-    std::cout << "resultD: " << resultD << std::endl;
-    std::cout << "ResultE: " << resultE << std::endl;
+    std::cout << "[CLIENT] ResultA: " << resultA << std::endl;
+    std::cout << "[CLIENT] resultB: " << resultB << std::endl;
+    std::cout << "[CLIENT] ResultC: " << resultC << std::endl;
+    std::cout << "[CLIENT] resultD: " << resultD << std::endl;
+    std::cout << "[CLIENT] ResultE: " << resultE << std::endl;
 
     delete operation;
 
@@ -102,8 +105,16 @@ int main()
      IObserver* observer4 = nullptr;
      IObserver* observer5 = nullptr;
 
+     const int n_observers = 8;
+     std::vector<IObserver*> observers = {};
+
      create_message(*subject, "Hello World! :D");
      create_message(*subject, "Hello World! :D again!!");
+
+     for (int i = 0; i < n_observers; i++)
+     {
+         observers.push_back(create_observer(i + n_observers, *subject));
+     }
 
      removeme_from_the_list(*observer3);
 
@@ -119,14 +130,25 @@ int main()
      removeme_from_the_list(*observer4);
      removeme_from_the_list(*observer1);
 
+     for (int i = 0; i < n_observers; i++)
+     {
+         removeme_from_the_list(*observers.at(i));
+     }
+
+     // Delete pointers.
 
      delete observer5;
      delete observer4;
      delete observer3;
      delete observer2;
      delete observer1;
-     delete subject;
 
+     for (int i = 0; i < n_observers; i++)
+     {
+         delete observers.at(i);
+     }
+
+     delete subject;
      delete dynamic_library_manager;
 
     return 0;
