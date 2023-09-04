@@ -7,8 +7,14 @@ A proof of concept about:
 3. ✅ How to load and consume dynamic library in a cross-platform (linux and windows) client.
 4. ✅ How to use the beneficts of docker images, docker-compose and GitHub actions as a system to build and running a client that consumes the dynamic library.
 
-## A. Create Nuget Package (windows delivery)
+Status:
 
+| Command | Description |
+| --- | --- |
+| Linux build | [![Linux build](https://github.com/jke94/building-dynamiclibrary/actions/workflows/cmake.yml/badge.svg?branch=master)](https://github.com/jke94/building-dynamiclibrary/actions/workflows/cmake.yml) |
+| Docker Compose Builder | [![Docker Compose Builder](https://github.com/jke94/building-dynamiclibrary/actions/workflows/dockercomposebuild.yml/badge.svg?branch=master)](https://github.com/jke94/building-dynamiclibrary/actions/workflows/dockercomposebuild.yml) |
+
+## A. Create Nuget Package (windows delivery)
 
 1. From Developer Command Prompt vs2022, running the following commands:
 ```
