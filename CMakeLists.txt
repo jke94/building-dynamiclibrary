@@ -9,11 +9,16 @@ file(GLOB_RECURSE MY_CPP_SOURCES RELATIVE
     ${CMAKE_SOURCE_DIR} "dynamiclibrary/*.cpp"
 )
 
+file(GLOB_RECURSE MY_CPP_LOGGER RELATIVE 
+    ${CMAKE_SOURCE_DIR} "logger/*.cpp"
+)
+
 include_directories(
     dynamiclibrary
 )
 
 add_library(dynamiclibrary SHARED ${MY_CPP_SOURCES})
+add_library(logger SHARED ${MY_CPP_LOGGER})
 
 add_executable(clientdynamiclibrary 
     clientdynamiclibrary/main.cpp

@@ -55,6 +55,7 @@ docker-compose -f ./docker-compose.yml -p building-dynamic-lib up --build
 
 - [MSDN - What is a DLL](https://learn.microsoft.com/en-us/troubleshoot/windows-client/deployment/dynamic-link-library)
 
+- [Marius Bancila's Blog - Writing a simple logging function in C++20](https://mariusbancila.ro/blog/2021/07/03/writing-a-simple-logging-function-in-c20/)
 ## D. Author
 
 - [Javier Carracedo](https://github.com/jke94)
