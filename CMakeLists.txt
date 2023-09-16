@@ -15,6 +15,7 @@ file(GLOB_RECURSE MY_CPP_LOGGER RELATIVE
 
 include_directories(
     dynamiclibrary
+    logger
 )
 
 add_library(dynamiclibrary SHARED ${MY_CPP_SOURCES})
@@ -26,4 +27,6 @@ add_executable(clientdynamiclibrary
 )
 
 target_link_libraries(clientdynamiclibrary 
-    dynamiclibrary)
+    dynamiclibrary
+    logger
+)
